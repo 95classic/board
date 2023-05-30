@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.board.MemberMapper">
+
+	<!-- 회원 등록 -->
+	<insert id="insert">
+		INSERT INTO ${memberMember}
+		VALUES (#{memberId}, #{memberPw}, #{memberName}, #{memberPhone},
+		#{memberEmail}, SYSDATE)
+	</insert>
+	
+	<!-- 회원 상세 검색 -->
+	<select id="select_by_member_id" resultType="MemberVO">
+		SELECT * FROM ${memberMember}
+		WHERE ${memberId} = #{memberId}
+	</select>
+	
+	<!-- 회원 수정 -->
+	<update id="update">
+		UPDATE ${memberMember} 
+		SET ${memberPw} = #{memberPw}, ${memberName} = #{memberName},
+			${memberPhone} = #{memberPhone}, ${memberEmail} = #{memberEmail}
+		WHERE ${memberId} = #{memberId}
+	</update>
+	
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="delete">
+		DELETE FROM ${memberMember}
+		WHERE ${memberId} = #{memberId} AND ${memberPw} = #{memberPw}
+	</delete>
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(*) FROM ${memberMember}
+		WHERE ${memberId} = #{memberId}
+	</select>
+	
+	<!-- 휴대번호 중복체크 -->
+	<select id="phoneCheck" resultType="int">
+		SELECT COUNT(*) FROM ${memberMember}
+		WHERE ${memberPhone} = #{memberPhone}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="MemberVO">
+		SELECT ${memberId}, ${memberPw}
+		FROM ${memberMember}
+		WHERE ${memberId} = #{memberId} AND ${memberPw} = #{memberPw}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="find_member_id" resultType="String">
+		SELECT ${memberId} FROM ${memberMember}
+		WHERE ${memberName} = #{memberName} AND ${memberPhone} = #{memberPhone}
+		AND ${memberEmail} = #{memberEmail}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="find_member_pw" resultType="String">
+		SELECT ${memberPw} FROM ${memberMember}
+		WHERE ${memberId} = #{memberId} AND ${memberName} = #{memberName}
+		AND ${memberPhone} = #{memberPhone} AND ${memberEmail} = #{memberEmail}
+	</select>
+	
+	<!-- 내 가입일 조회 -->
+	<select id="select_member_date_created" resultType="java.util.Date">
+	 	SELECT ${memberDateCreated}
+	 	FROM ${memberMember}
+	 	WHERE ${memberId} = #{meberId}
+	</select>
+</mapper>
+
