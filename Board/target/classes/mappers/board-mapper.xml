@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.board.BoardMapper">
+
+	 <!-- 게시글 등록 -->
+	 <insert id="insert">
+	 	insert into ${boardBoard} 
+	 	values (boardBoard_SEQ.NEXTVAL, #{memberId}, #{boardTitle}, #{boardContent}, SYSDATE, #{replyCnt})
+	 </insert>
+	 
+	 <!--  게시글 전체검색 기본-->
+	 <select id="select_all_default" resultType="BoardVO">
+	 	select * from ${boardBoard}
+	 	order by ${boardId} DESC
+	 </select>
+	 
+	 <!-- 게시판 전체 검색(댓글 많은 순) -->
+	 <select id="select_all_reply_cnt" resultType="BoardVO">
+	 	select * from ${boardBoard}
+	 	order by ${replyCnt} DESC
+	 </select>
+	 
+	 
+	 <!-- 게시글 상세 검색-->
+	 <select id="select_by_board_id" resultType="BoardVO">
+	 	select * from ${boardBoard} where ${boardId} = #{boardId}
+	 </select>
+	 
+	 <!-- 게시글 수정 -->
+	 <update id="update">
+	 	update ${boardBoard}
+	 	set ${boardTitle} = #{boardTitle}, ${boardContent} = #{boardContent},
+	 	${boardDateCreated} = SYSDATE
+		where ${boardId} = #{boardId}
+	 </update>
+	
+	<!-- 게시글 삭제 -->
+	<delete id="delete">
+		delete from ${boardBoard}
+		where ${boardId} = #{boardId}
+	</delete>
+	
+	<!-- 게시글 제목 또는 내용으로 검색 -->
+	<select id="select_by_title_content" resultType="BoardVO">
+		select b.${boardId}, b.${boardTitle}, b.${boardContent}, b.${memberId},
+			   b.${boardDateCreated}, b.${replyCnt}
+		from (
+			 select rownum rn, a.*from(
+				 select * from ${boardBoard} where ${boardTitle} like #{keyword} or ${boardContent} like #{keyword}
+				 order by ${boardId} DESC
+			) a
+		) b where rn between #{start} and #{end}
+	</select>
+	
+	<!--게시글 작성자로 검색 -->
+	<select id="select_by_member_id" resultType="BoardVO">
+		select b.${boardId}, b.${boardTitle}, b.${boardContent}, b.{memberId},
+		b.${boardDateCreated}, b.${replyCnt}
+		from (
+			 select rownum rn, a.* from (
+			 	select * from ${boardBoard} where ${memberId} like #{keyword} 
+			 	order by ${boardId} DESC
+			)a
+		)b where rn between #{start} and #{end}
+	</select>
+	
+	<!-- 게시글 페이징 처리 -->
+	<select id="paging" resultType="BoardVO">
+		select b.${boardId}, b.${boardTitle}, b.${boardContent}, b.${memberId}, b.${boardDateCreated}, b.${replyCnt}
+		from(
+    		select rownum rn, a.* from(
+        		select * from ${boardBoard} order by ${boardId} desc
+  		  )a
+		)b where rn between #{start} and #{end}
+	</select>
+	
+	<!--  paging 처리 부분 
+	#{start} : criteria.getStart()
+	#{end} : criteria.getEnd()
+	 -->
+	 
+	 <!-- 게시글 수 반환 -->
+	 <select id="total_count" resultType="Integer">
+	 	select count(*) total_cnt from ${boardBoard}
+	 </select>
+	 
+	 <!-- 댓글 등록, 삭제가 일어날 때 댓글 개수 수정 -->
+	 <update id="update_reply_cnt">
+	 	update ${boardBoard}
+		set ${replyCnt} = ${replyCnt} + #{amount}
+		where ${boardId} = #{boardId}
+	 </update>
+	 
+	 <!-- 내 게시글 수 조회 -->
+	 <select id="select_board_cnt" resultType="Integer">
+	 	select count(*) from ${boardBoard}
+	 	where ${memberId} = #{memberId}	 	
+	 </select>
+	 
+	 
+
+</mapper>
