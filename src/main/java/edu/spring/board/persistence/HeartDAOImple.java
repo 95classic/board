@@ -49,6 +49,7 @@ public class HeartDAOImple implements HeartDAO {
 		return sqlSession.delete(NAMESPACE + ".delete",args);
 	}
 
+	
 	@Override
 	public int selectHeartCnt(String memberId) {
 		logger.info("selectHeartCnt() 호출 : memberId = " + memberId);
