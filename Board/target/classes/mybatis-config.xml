@@ -39,6 +39,13 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	 	 <property name="memberEmail" value="MEMBER_EMAIL"/>
 		 <property name="memberDateCreated" value="MEMBER_DATE_CREATED"/>
 		 
+		 
+		 <!-- HEARTHEART 테이블 -->
+		 <property name="heartHeart" value="HEARTHEART"/>
+		 <property name="heartId" value="HEART_ID"/>
+		 <property name="boardId" value="BOARD_ID"/>
+		 <property name="memberId" value="MEMBER_ID"/>
+		 
 	</properties>
 	
 	<!-- underscore 명명법을 camel 명명법으로 변환 가능하도록 세팅 -->
