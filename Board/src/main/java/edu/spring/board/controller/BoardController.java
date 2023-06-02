@@ -127,6 +127,40 @@ public class BoardController {
 		}
 	} // end delete();
 	
+	@GetMapping("search")
+	public String titleOrContentSearch(Model model, String keyword, String searchType, Integer page, Integer numsPerPage) {
+		logger.info("titleOrContentSearch() 호출");
+		logger.info("page = " + page + ", numsPerPage = " + numsPerPage);
+		logger.info(searchType);
+		
+		//페이징 처리 
+		// null 상태가 아닐때만 데이터 남겨준다는 내용
+		PageCriteria criteria = new PageCriteria();
+		if(page != null) {
+			criteria.setPage(page);
+		}
+		if(numsPerPage != null) {
+			criteria.setNumsPerPage(numsPerPage);
+		}
+		List<BoardVO> list = null;
+		if(searchType.equals("")) {
+			list = boardService.read(criteria);
+		} else if (searchType.equals("memberId")) {
+			list = boardService.readByMemberId(keyword, criteria.getStart(), criteria.getEnd());
+		} else if(searchType.equals("titleOrContent")) {
+			list = boardService.readByTitleOrContent(keyword, criteria.getStart(),criteria.getEnd());
+		}
+		
+		model.addAttribute("list", list);
+		PageMaker pageMaker = new PageMaker();
+		pageMaker.setCriteria(criteria);
+		pageMaker.setTotalCount(boardService.getTotalCounts());
+		pageMaker.setPageData();
+		model.addAttribute("pageMaker", pageMaker);
+		
+		return "board/list";
+	}
+	
 } // end BoardController
 
 

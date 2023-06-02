@@ -18,4 +18,5 @@ public interface BoardDAO {
 	int getTotalCounts(); //  총 게시글 수
 	int updateReplyCnt(int amount, int boardId); // 게시판 댓글 개수 업데이트
 	int selectBoardCnt(String memberId); // 게시글 조회
+	int updateHeartCnt(int amount, int boardId);
 }

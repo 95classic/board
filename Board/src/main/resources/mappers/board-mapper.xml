@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <!-- 게시글 등록 -->
 	 <insert id="insert">
 	 	insert into ${boardBoard} 
-	 	values (boardBoard_SEQ.NEXTVAL, #{memberId}, #{boardTitle}, #{boardContent}, SYSDATE, #{replyCnt})
+	 	values (boardBoard_SEQ.NEXTVAL, #{memberId}, #{boardTitle}, #{boardContent}, SYSDATE, #{replyCnt}, #{heartCnt})
 	 </insert>
 	 
 	 <!--  게시글 전체검색 기본-->
@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글 제목 또는 내용으로 검색 -->
 	<select id="select_by_title_content" resultType="BoardVO">
 		select b.${boardId}, b.${boardTitle}, b.${boardContent}, b.${memberId},
-			   b.${boardDateCreated}, b.${replyCnt}
+			   b.${boardDateCreated}, b.${replyCnt}, b.${heartCnt}
 		from (
 			 select rownum rn, a.*from(
 				 select * from ${boardBoard} where ${boardTitle} like #{keyword} or ${boardContent} like #{keyword}
@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--게시글 작성자로 검색 -->
 	<select id="select_by_member_id" resultType="BoardVO">
 		select b.${boardId}, b.${boardTitle}, b.${boardContent}, b.{memberId},
-		b.${boardDateCreated}, b.${replyCnt}
+		b.${boardDateCreated}, b.${replyCnt}, b.${heartCnt}
 		from (
 			 select rownum rn, a.* from (
 			 	select * from ${boardBoard} where ${memberId} like #{keyword} 
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 게시글 페이징 처리 -->
 	<select id="paging" resultType="BoardVO">
-		select b.${boardId}, b.${boardTitle}, b.${boardContent}, b.${memberId}, b.${boardDateCreated}, b.${replyCnt}
+		select b.${boardId}, b.${boardTitle}, b.${boardContent}, b.${memberId}, b.${boardDateCreated}, b.${replyCnt}, b.${heartCnt}
 		from(
     		select rownum rn, a.* from(
         		select * from ${boardBoard} order by ${boardId} desc
@@ -91,6 +91,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	update ${boardBoard}
 		set ${replyCnt} = ${replyCnt} + #{amount}
 		where ${boardId} = #{boardId}
+	 </update>
+	 
+	 <!-- 하트 등록, 삭제시 갯수 수정 -->
+	 <update id="update_heart_cnt">
+	 	update ${boardBoard}
+	 	set ${heartCnt} = ${heartCnt} + #{amount}
+	 	where ${boardId} = #{boardId}
 	 </update>
 	 
 	 <!-- 내 게시글 수 조회 -->

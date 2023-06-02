@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="edu.spring.hotel.HeartMapper">
+<mapper namespace="edu.spring.board.HeartMapper">
 <!-- namespace : dao 클래스의 sqlSession과 연결하기 위한 키로 사용 -->
 	
 	<select id="select" resultType="Integer">
@@ -12,11 +12,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insert">
 		INSERT INTO ${heartHeart}
-		VALUES (HEARTHEART_SEQ, #{boardId}, #{memberId})
+		VALUES (HEARTHEART_SEQ.NEXTVAL, #{boardId}, #{memberId})
 	</insert>
 	
 	<delete id="delete">
-		DELETE FORM ${heartHeart}
+		DELETE FROM ${heartHeart}
 		WHERE ${boardId} = #{boardId} AND ${memberId} = #{memberId}
 	</delete>
 

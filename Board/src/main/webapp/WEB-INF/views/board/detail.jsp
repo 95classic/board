@@ -9,9 +9,49 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 <meta charset="UTF-8">
+
+<!-- Font Awesome 아이콘 라이브러리 추가 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <title>${vo.boardTitle }</title>
 
 <style>
+@keyframes heartbeat {
+	0% {
+		transform: scale(1);
+	}
+
+	50% {
+		transform: scale(1.2);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+.animated-heart {
+	animation: heartbeat 1s infinite;
+}
+
+.red-heart {
+	color: red;
+}
+
+#heartBtn {
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+}
+
+#heartIcon {
+	font-size: 30px;
+}
+
+#heartBtn:hover #heartIcon {
+	color: red; /* 마우스 호버 시 색상을 빨간색으로 변경 */
+	cursor: pointer;
+}
+
+
   body {
     background-color: #ffecd9;
     font-family: Arial, sans-serif;
@@ -85,6 +125,10 @@
   <div>
   	<p> 글 번호 : ${vo.boardId }</p>
   </div>
+  	<span id="heartBtn">
+  		<i id="heartIcon" class="far fa-heart"></i>
+	</span>
+  
   <div>
   	<p>제목: </p>
   	<p>${vo.boardTitle }</p>
@@ -94,6 +138,7 @@
   					<fmt:formatDate value="${vo.boardDateCreated }"
   					pattern="yyyy-MM-dd HH:mm:ss" var="boardDateCreated"/>
   	<p>작성일 : ${boardDateCreated }</p>
+  	
   </div>  
   <div>
   	<textarea rows="20" cols="120" readonly>${vo.boardContent }</textarea>
@@ -106,13 +151,14 @@
   	<input type="hidden" name="boardId" value="${vo.boardId }">
   	<input type="submit" value="글 삭제">  
   </form>
-  
+
   <input type="hidden" id="boardId" value="${vo.boardId }">
   
   	<div>
-		<input type="text" id="memberId" value="${vo.memberId }" >
+		<input type="text" id="memberId" value="${sessionScope.memberId }" >
 		<input type="text" id="replyContent">
 		<button id="btn_add">작성</button>
+		
 	</div>
 	
 	<hr>
@@ -124,7 +170,7 @@
   <script type="text/javascript" >
 		$(document).ready(function(){
 			getAllReplies();
-			
+			getHeart();
 			$('#btn_add').click(function(){
 				var boardId = $('#boardId').val(); // 게시판 번호 데이터
 				var memberId = $('#memberId').val(); // 작성자 데이터
@@ -258,6 +304,73 @@
 					}
 				});
 			});
+			
+			$('#heartIcon').click(function(){
+				var memberId = $('#memberId').val();
+				// 로그인 상태 여부 판단 후 좋아요 기능 작동
+				// far 하트 비어있음 fas 꽉 찬 하트 
+				if(memberId != null) { // 로그인 했을때
+					if($('#heartIcon').hasClass('far')) { // 비어있는 하트일때
+						var boardId = $('#boardId').val();
+						var memberId = $('#memberId').val();
+						var obj = {
+							'boardId' : boardId,
+							'memberId' : memberId
+						}
+						$.ajax({
+							type : 'POST',
+							url : 'heart/',
+							headers : {
+								'Content-Type': 'application/json'
+							},
+							data : JSON.stringify(obj),
+							success : function(result) {
+								console.log(result);
+								if(result == 1) {
+									$('#heartIcon').removeClass('far').addClass('fas animated-heart red-heart');
+								}
+							}
+						}); // end ajax
+					} else { //  꽉 찬 하트일때
+						var boardId = $('#boardId').val();
+						var memberId = $('#memberId').val();
+						$.ajax({
+							type : 'DELETE',
+							url : 'heart/' + boardId,
+							headers : {
+								'Content-Type' : 'application/json'
+							},
+							data : memberId,
+							success : function(result){
+								console.log(result);
+								if(result >= 1){
+									$('#heartIcon').removeClass('fas animated-heart red-heart').addClass('far')
+								}
+							}
+						});// end ajax
+					}
+				} else{
+					alert('로그인 후 이용해주세요!');
+					location.href = 'member/login';
+				}
+			}); // end heartBtn.click
+			
+			function getHeart() { // 하트 클릭 여부 확인해서 출력 
+				var boardId = $('#boardId').val();
+				var memberId = $('#memberId').val();
+				$.ajax({
+					type : 'GET',
+					url : 'heart/' + boardId + '?memberId=' + memberId,
+					success : function(result) {
+						console.log(result);
+						if(result == 0) {
+							$('#heartIcon').removeClass('fas animated-heart red-heart').addClass('far');
+						} else{
+							$('#heartIcon').removeClass('far').addClass('fas animated-heart red-heart');
+						}
+					}
+				}); // end ajax
+			} // end getHeart
 			
 		}); // end document()
 	</script>

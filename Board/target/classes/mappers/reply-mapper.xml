@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="edu.spring.board.ReplyMapper">
 	<insert id="insert">
 		insert into ${replyReply}
-		VALUES (REPLYREPLY_SEQ.NEXTVAL, #{boardId}, #{memberId}, #{replyContent}, SYSDATE)
+		VALUES (REPLYREPLY_SEQ.NEXTVAL, #{memberId}, #{boardId}, #{replyContent}, SYSDATE)
 	</insert>
 	
 	<select id="select_all_by_board_id" resultType="ReplyVO">

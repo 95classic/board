@@ -118,5 +118,14 @@ public class BoardDAOImple implements BoardDAO{
 		logger.info("selectBoardCnt() 호출 : memberId = " + memberId);
 		return sqlSession.selectOne(NAMESPACE + ".select_board_cnt", memberId);
 	} // end selectBoardCnt 게시글 조회
+
+	@Override
+	public int updateHeartCnt(int amount, int boardId) {
+		logger.info("updateHeartCnt() 호출 : boardId = " + boardId);
+		Map<String , Object> args = new HashMap<>();
+		args.put("amount", amount);
+		args.put("boardId", boardId);
+		return sqlSession.update(NAMESPACE + ".update_heart_cnt",args);
+	} // end updateHeaertCnt 좋아요 수 조회 
 	
 }

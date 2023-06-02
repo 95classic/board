@@ -10,7 +10,7 @@ public class HeartVO {
 	}
 
 	public HeartVO(int heartId, int boardId, String memberId) {
-		super();
+
 		this.heartId = heartId;
 		this.boardId = boardId;
 		this.memberId = memberId;

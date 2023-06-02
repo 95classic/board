@@ -31,6 +31,24 @@ h1 {
 	font-weight: bold;
 }
 
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.animated-heart {
+	animation: heartbeat 1s infinite;
+	display: inline-block;
+	color: red;
+	font-size: 20px;
+}
+
 .btn-primary {
 	background-color: #007bff;
 	border-color: #007bff;
@@ -104,6 +122,7 @@ th {
 		<c:if test="${empty sessionScope.memberId }">
 					<a href="/board/member/login">로그인</a>
 					<a href="/board/member/register">회원가입</a>
+
 		</c:if>
 		
   </div>
@@ -119,10 +138,12 @@ th {
 				<th style="width : 500px">제목</th>
 				<th style="width : 130px">작성일</th>
 				<th style="width : 60px">댓글수</th>
+				<th style="width : 50px">좋아요</th>
 			</tr>
 		</thead>
 		<tbody>
 		<c:forEach var="vo" items="${list }">
+		<!-- 여기서 var="vo"는 list가 들어간 이름 지정한거 -->
 			<tr>
 				<td>${vo.memberId }</td>
 				<td><a href="detail?boardId=${vo.boardId }&page=${pageMaker.criteria.page }"
@@ -131,6 +152,10 @@ th {
 				pattern="yyyy-MM-dd HH:mm:ss" var="boardDateCreated"/>
 				<td>${boardDateCreated }</td>
 				<td>${vo.replyCnt }</td>
+				<td>
+					<span id="heart" class="animated-heart">&#x2764;</span>
+					(${vo.heartCnt })
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>
@@ -146,8 +171,25 @@ th {
 		<c:if test="${pageMaker.hasNext }">
 			<li><a href="list?page=${pageMaker.endPageNo + 1 }">다음</a></li>
 		</c:if>
-		
 	</ul>
+	
+	<form action="search" method="GET">
+		<div>
+			<label for="saerchType">검색유형</label>
+			<select name="searchType" id="searchType">
+				<option value="titleOrContent">제목 또는 내용</option>
+				<option value="memberId">작성자</option>
+			</select>
+		</div>
+		<div>
+			<label for="keyword">키워드</label>
+			<input type="text" name="keyword" id="keyword" placeholder="검색어 입력">
+		</div>
+		<div>
+			<button type="submit">검색</button>
+		</div>
+	
+	</form>
 	
 	<!-- BaordController -> registerPOST()에서 보낸 데이터 저장 -->
 	<input type="hidden" id="Alert" value="${result }">
@@ -168,12 +210,3 @@ th {
 </body>
 </html>
  
-
-
-
-
-
-
-
-
-
