@@ -144,22 +144,35 @@
   	<textarea rows="20" cols="120" readonly>${vo.boardContent }</textarea>
   </div>
   <a href="list?page=${page }"><input type="button" value="글 목록"></a>
-  <a href="update?boardId=${vo.boardId }&page=${page}">
-  <input type="button" value="글 수정">
-  </a>
+
+	<!-- 로그인 한 아이디와 작성자의 아이디가 같을 시에 수정 버튼 보여지게 함  -->  
+  <c:if test="${sessionScope.memberId == vo.memberId }">
+ 	 <a href="update?boardId=${vo.boardId }&page=${page}">
+ 	 <input type="button" value="글 수정">
+  	</a>
+  </c:if>
+  
+  <!-- 로그인 한 아이디와 작성자의 아이디가 같을 시에 수정 삭제 보여지게 함  --> 
   <form action="delete" method="POST">
   	<input type="hidden" name="boardId" value="${vo.boardId }">
-  	<input type="submit" value="글 삭제">  
+	  	<c:if test="${sessionScope.memberId == vo.memberId }">
+  			<input type="submit" value="글 삭제">  
+  		</c:if>
   </form>
 
   <input type="hidden" id="boardId" value="${vo.boardId }">
   
-  	<div>
+  <!-- 로그인 되어 있을 때 댓글 작성 버튼 뜨게 만듬 -->
+  	<c:if test="${not empty sessionScope.memberId }">
 		<input type="text" id="memberId" value="${sessionScope.memberId }" >
 		<input type="text" id="replyContent">
 		<button id="btn_add">작성</button>
 		
-	</div>
+	</c:if>
+	
+	<c:if test="${empty sessionScope.memberId}">
+		댓글은 로그인이 필요한 기능입니다. <a href="/board/member/login">로그인하기</a>
+	</c:if>
 	
 	<hr>
 	<div style="text-align: center;">
