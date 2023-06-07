@@ -21,6 +21,16 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		 <property name="replyCnt" value="REPLY_CNT"/>
 		 <property name="heartCnt" value="HEART_CNT"/>
 		 
+		 <!-- HOTELHOTEL 테이블 -->
+		 <property name="hotelHotel" value="HOTELHOTEL"/>
+		 <property name="hotelId" value="HOTEL_ID"/>
+		 <property name="hotelName" value="HOTEL_NAME"/>
+		 <property name="hotelContent" value="HOTEL_CONTENT"/>
+		 <property name="hotelAddress" value="HOTEL_ADDRESS"/>
+		 <property name="reviewCnt" value="REVIEW_CNT"/>
+		 <property name="hotelImg" value="HOTEL_IMG"/>
+		 <property name="hotelReviewAvg" value="HOTEL_REVIEW_AVG"/>
+		 <property name="heartCnt" value="HEART_CNT"/>
 		 
 		 <!-- REPLYREPLY 테이블 -->
 		 <property name="replyReply" value="REPLYREPLY"/>

@@ -9,24 +9,24 @@ import edu.spring.hotel.pageutil.PageCriteria;
 public interface HotelDAO {
 	
 	
-	HotelVO select(int hotelId); // í˜¸í…” ìƒì„¸ ê²€ìƒ‰
+	HotelVO select(int hotelId); // È£ÅÚ »ó¼¼ °Ë»ö
 	
-	List<HotelVO> select(PageCriteria criteria); // í˜¸í…” í˜ì´ì§• ì²˜ë¦¬ë¥¼ ìœ„í•œ ì „ì²´ ê²€ìƒ‰
+	List<HotelVO> select(PageCriteria criteria); // È£ÅÚ ÆäÀÌÂ¡ Ã³¸®¸¦ À§ÇÑ ÀüÃ¼ °Ë»ö
 	
-	List<HotelVO> selectAllByReviewDesc(PageCriteria criteria); // í˜¸í…” ë¦¬ë·° ë§ì€ ìˆœ ì „ì²´ê²€ìƒ‰
+	List<HotelVO> selectAllByReviewDesc(PageCriteria criteria); // È£ÅÚ ¸®ºä ¸¹Àº ¼ø ÀüÃ¼°Ë»ö
 	
-	List<HotelVO> selectAllByReviewAvgDesc(PageCriteria criteria); // í˜¸í…” í‰ê·  ë³„ì  ìˆœ ì „ì²´ê²€ìƒ‰
+	List<HotelVO> selectAllByReviewAvgDesc(PageCriteria criteria); // È£ÅÚ Æò±Õ º°Á¡ ¼ø ÀüÃ¼°Ë»ö
 	
-	List<HotelVO> selectAllByHotelNameAsc(PageCriteria criteria); // í˜¸í…” ê°€ë‚˜ë‹¤ ìˆœ ì „ì²´ê²€ìƒ‰
+	List<HotelVO> selectAllByHotelNameAsc(PageCriteria criteria); // È£ÅÚ °¡³ª´Ù ¼ø ÀüÃ¼°Ë»ö
 	
-	List<HotelVO> selectByHotelName(String keyword, PageCriteria criteria); // í˜¸í…” ì´ë¦„ í‚¤ì›Œë“œë¡œ ê²€ìƒ‰
+	List<HotelVO> selectByHotelName(String keyword, PageCriteria criteria); // È£ÅÚ ÀÌ¸§ Å°¿öµå·Î °Ë»ö
 
-	int getTotalCounts(); // ì „ì²´ í˜¸í…” ìˆ˜ ë¶ˆëŸ¬ì˜¤ê¸°
+	int getTotalCounts(); // ÀüÃ¼ È£ÅÚ ¼ö ºÒ·¯¿À±â
 
-	int updateReviewCntAndAvg(int amount, int hotelId); // í˜¸í…” ë³„ì  ë“±ë¡, ì‚­ì œì‹œ ë³„ì  í‰ê·  ìˆ˜ì •
+	int updateReviewCntAndAvg(int amount, int hotelId); // È£ÅÚ º°Á¡ µî·Ï, »èÁ¦½Ã º°Á¡ Æò±Õ ¼öÁ¤
 	
-	int updateHeartCnt(int amount, int boardId); // í•˜íŠ¸ ë“±ë¡, ì‚­ì œ ì‹œ í˜¸í…” í…Œì´ë¸”ì˜ í•˜íŠ¸ ê°œìˆ˜ ìˆ˜ì •
+	int updateHeartCnt(int amount, int hotelId); // ÇÏÆ® µî·Ï, »èÁ¦ ½Ã È£ÅÚ Å×ÀÌºíÀÇ ÇÏÆ® °³¼ö ¼öÁ¤
 	
-	List<HotelVO> selectByHeart(String memberId); // ì‚¬ìš©ìê°€ ì°œí•œ í˜¸í…”ëª©ë¡ ì „ì²´ê²€ìƒ‰
+	List<HotelVO> selectByHeart(String memberId); // »ç¿ëÀÚ°¡ ÂòÇÑ È£ÅÚ¸ñ·Ï ÀüÃ¼°Ë»ö
 	
 }

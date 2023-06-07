@@ -1,8 +1,6 @@
 package edu.spring.hotel;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.spring.hotel.domain.HotelVO;
@@ -38,11 +35,11 @@ public class IndexController {
 	@GetMapping
 	public String indexGET(Model model, Integer page, Integer numsPerPage, String sortBy, String keyword,
 			RedirectAttributes reAttr) {
-		logger.info("indexGET() í˜¸ì¶œ");
+		logger.info("indexGET() È£Ãâ");
 		logger.info("page = " + page + ", numsPerPage = " + numsPerPage);
-		logger.info("ì •ë ¬ ë°©ì‹ : " + sortBy);
+		logger.info("Á¤·Ä ¹æ½Ä : " + sortBy);
 		logger.info(keyword);
-		// í˜ì´ì§• ì²˜ë¦¬
+		// ÆäÀÌÂ¡ Ã³¸®
 		PageCriteria criteria = new PageCriteria();
 		if (page != null) {
 			criteria.setPage(page);
@@ -65,12 +62,12 @@ public class IndexController {
 			model.addAttribute("list", list);
 		}
 
-		// keyword ê²€ìƒ‰ í‚¤ì›Œë“œê°€ ìˆìœ¼ë©´
+		// keyword °Ë»ö Å°¿öµå°¡ ÀÖÀ¸¸é
 		if (keyword != null) {
 			List<HotelVO> list = hotelService.readByHotelName(keyword, criteria);
 			model.addAttribute("list", list);
 
-			// keyword ê°’ì´ ì—†ìœ¼ë©´(ê²€ìƒ‰ê²°ê³¼ê°€ ì—†ìœ¼ë©´)
+			// keyword °ªÀÌ ¾øÀ¸¸é(°Ë»ö°á°ú°¡ ¾øÀ¸¸é)
 			if (list.isEmpty()) {
 				reAttr.addFlashAttribute("result", "searchFail");
 				return "redirect:/";
@@ -82,14 +79,14 @@ public class IndexController {
 		pageMaker.setCriteria(criteria);
 		pageMaker.setTotalCount(hotelService.getTotalCounts());
 		pageMaker.setPageData();
-		model.addAttribute("sortBy", sortBy); // ì •ë ¬ë³„ ìˆœì„œë•Œ í˜ì´ì§• ì²˜ë¦¬ê°€ ì œ ê¸°ëŠ¥ì„ í•˜ë ¤ë©´ ì¿¼ë¦¬ìŠ¤íŠ¸ë§ì„ ìœ ì§€í•´ì£¼ì–´ì•¼ í•¨
+		model.addAttribute("sortBy", sortBy); // Á¤·Äº° ¼ø¼­¶§ ÆäÀÌÂ¡ Ã³¸®°¡ Á¦ ±â´ÉÀ» ÇÏ·Á¸é Äõ¸®½ºÆ®¸µÀ» À¯ÁöÇØÁÖ¾î¾ß ÇÔ
 		model.addAttribute("pageMaker", pageMaker);
 		return "index";
 	} // end indexGET()
 
 	@GetMapping("/detail")
 	public void detailGET(Model model, Integer hotelId, Integer page) {
-		logger.info("detailGET() í˜¸ì¶œ : hotelId = " + hotelId);
+		logger.info("detailGET() È£Ãâ : hotelId = " + hotelId);
 		HotelVO hvo = hotelService.read(hotelId);
 		List<RoomVO> list = roomService.read(hotelId);
 		model.addAttribute("list", list);
@@ -99,7 +96,7 @@ public class IndexController {
 
 	@GetMapping("/login")
 	public String loginGET() {
-		logger.info("loginGET() í˜¸ì¶œ");
+		logger.info("loginGET() È£Ãâ");
 		return "redirect:/member/login";
 	} // end loginGET()
 

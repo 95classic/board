@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import edu.spring.hotel.domain.HotelVO;
-import edu.spring.hotel.domain.MemberVO;
 import edu.spring.hotel.pageutil.PageCriteria;
 
 @Repository
@@ -26,27 +25,27 @@ public class HotelDAOImple implements HotelDAO{
 
 	@Override
 	public HotelVO select(int hotelId) {
-		logger.info("select()Ìò∏Ï∂ú : hotelId = " + hotelId);
+		logger.info("select()»£√‚ : hotelId = " + hotelId);
 		return sqlSession.selectOne(NAMESPACE + ".select_by_hotel_id", hotelId);
- 	} // end select ÏÉÅÏÑ∏ Í≤ÄÏÉâ
+ 	} // end select ªÛºº ∞Àªˆ
 
 	@Override
 	public List<HotelVO> select(PageCriteria criteria) {
-		logger.info("select()Ìò∏Ï∂ú");
+		logger.info("select()»£√‚");
 		logger.info("start = " + criteria.getStart());
 		logger.info("end = " + criteria.getEnd());
 		return sqlSession.selectList(NAMESPACE + ".paging", criteria);
-	} // select Ìò∏ÌÖî ÌéòÏù¥Ïßï Ï≤òÎ¶¨ 
+	} // select »£≈⁄ ∆‰¿Ã¬° √≥∏Æ 
 
 	@Override
 	public int getTotalCounts() {
-		logger.info("getTotalcount()Ìò∏Ï∂ú");
+		logger.info("getTotalcount()»£√‚");
 		return sqlSession.selectOne(NAMESPACE + ".total_count");
-	} // getTotalCounts Ï†ÑÏ≤¥ Ìò∏ÌÖî Ïàò Î∂àÎü¨Ïò§Í∏∞
+	} // getTotalCounts ¿¸√º »£≈⁄ ºˆ ∫“∑Øø¿±‚
 	
 	@Override
 	public int updateReviewCntAndAvg(int amount, int hotelId) {
-	    logger.info("updateReviewCntAndAvg() Ìò∏Ï∂ú");
+	    logger.info("updateReviewCntAndAvg() »£√‚");
 	    logger.info("amount = " + amount);
 	    logger.info("hotelId = " + hotelId);
 	    Map<String, Object> args = new HashMap<>();
@@ -57,25 +56,25 @@ public class HotelDAOImple implements HotelDAO{
 
 	@Override
 	public List<HotelVO> selectAllByReviewDesc(PageCriteria criteria) {
-		logger.info("selcet()Ìò∏Ï∂ú");
+		logger.info("selcet()»£√‚");
 		return sqlSession.selectList(NAMESPACE + ".select_all_review_desc", criteria);
-	} // end selectAllByReviewDesc Î¶¨Î∑∞ ÎÇ¥Î¶ºÏ∞®Ïàú Ï†ÑÏ≤¥Í≤ÄÏÉâ
+	} // end selectAllByReviewDesc ∏Æ∫‰ ≥ª∏≤¬˜º¯ ¿¸√º∞Àªˆ
 
 	@Override
 	public List<HotelVO> selectAllByReviewAvgDesc(PageCriteria criteria) {
-		logger.info("selectAllByReviewAvgDesc() Ìò∏Ï∂ú");
+		logger.info("selectAllByReviewAvgDesc() »£√‚");
 		return sqlSession.selectList(NAMESPACE + ".select_all_hotel_review_avg_desc", criteria);
 	}
 
 	@Override
 	public List<HotelVO> selectAllByHotelNameAsc(PageCriteria criteria) {
-		logger.info("selectAllByHotelNameDesc() Ìò∏Ï∂ú");
+		logger.info("selectAllByHotelNameDesc() »£√‚");
 		return sqlSession.selectList(NAMESPACE + ".select_all_hotel_name_asc", criteria);
 	}
 
 	@Override
 	public List<HotelVO> selectByHotelName(String keyword, PageCriteria criteria) {
-		logger.info("selectByHotelName() Ìò∏Ï∂ú : keyword = " + keyword);
+		logger.info("selectByHotelName() »£√‚ : keyword = " + keyword);
 		Map<String, Object> args = new HashMap<>();
 		args.put("keyword", "%" + keyword + "%");
 		args.put("start", criteria.getStart());
@@ -85,7 +84,7 @@ public class HotelDAOImple implements HotelDAO{
 
 	@Override
 	public int updateHeartCnt(int amount, int hotelId) {
-		logger.info("updateHeartCnt() Ìò∏Ï∂ú ");
+		logger.info("updateHeartCnt() »£√‚ ");
 		Map<String, Object> args = new HashMap<>();
 		args.put("amount", amount);
 		args.put("hotelId", hotelId);
@@ -95,7 +94,7 @@ public class HotelDAOImple implements HotelDAO{
 
 	@Override
 	public List<HotelVO> selectByHeart(String memberId) {
-		logger.info("selectByHeart() Ìò∏Ï∂ú : memberId = " + memberId);
+		logger.info("selectByHeart() »£√‚ : memberId = " + memberId);
 		return sqlSession.selectList(NAMESPACE + ".select_by_heart", memberId);
 	}
 

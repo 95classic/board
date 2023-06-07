@@ -22,13 +22,13 @@ public class BoardServiceImple implements BoardService {
 	
 	@Override
 	public int create(BoardVO vo) {
-		logger.info("create() 호출 : vo = " + vo.toString());
+		logger.info("create() �샇異� : vo = " + vo.toString());
 		return dao.insert(vo);
 	}
 
 	@Override
 	public List<BoardVO> read(PageCriteria criteria) {
-		logger.info("read() 호출");
+		logger.info("read() �샇異�");
 		logger.info("start : " + criteria.getStart());
 		logger.info("end : " + criteria.getEnd());
 		return dao.select(criteria);
@@ -36,40 +36,38 @@ public class BoardServiceImple implements BoardService {
 	
 	@Override
 	public BoardVO read(int boardId) {
-		logger.info("read() 호출 : boardId = " + boardId);
+		logger.info("read() �샇異� : boardId = " + boardId);
 		return dao.select(boardId);
 	}
 
 	@Override
 	public int update(BoardVO vo) {
-		logger.info("update() 호출 : vo = " + vo.toString());
+		logger.info("update() �샇異� : vo = " + vo.toString());
 		return dao.update(vo);
 	}
 
 	@Override
 	public int delete(int boardId) {
-		logger.info("delete() 호출 : boardId = " + boardId);
+		logger.info("delete() �샇異� : boardId = " + boardId);
 		return dao.delete(boardId);
 	}
 
 	@Override
 	public int getTotalCounts() {
-		logger.info("getTotalCounts() 호출");
+		logger.info("getTotalCounts() �샇異�");
 		return dao.getTotalCounts();
 	}
 
 	@Override
 	public List<BoardVO> readByTitleOrContent(String keyword, int start, int end) {
-		logger.info("readByTitleContent() 호출");
-		PageCriteria criteria = new PageCriteria(start, end);
-		return dao.selectByTitleOrContent(keyword, criteria.getStart(), criteria.getEnd());
+		logger.info("readByTitleContent() �샇異�");
+		return dao.selectByTitleOrContent(keyword, start, end);
 	}
 
 	@Override
 	public List<BoardVO> readByMemberId(String keyword, int start, int end) {
-		logger.info("readByMemberId() 호출");
-		PageCriteria criteria = new PageCriteria(start, end);
-		return dao.selectByMemberId(keyword, criteria.getStart(), criteria.getEnd());
+		logger.info("readByMemberId() �샇異�");
+		return dao.selectByMemberId(keyword, start, end);
 	}
 	
 } // end BoardServiceImple

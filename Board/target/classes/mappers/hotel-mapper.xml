@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.spring.board.HotelMapper">
+
+	<!-- 호텔 상세 검색 -->
+	<select id="select_by_hotel_id" resultType="HotelVO">
+		SELECT * FROM
+		${hotelHotel}
+		WHERE ${hotelId} = #{hotelId}
+	</select>
+	
+	
+	<!-- 호텔 기본 전체검색 (페이징처리)-->
+	<select id="select_all_default" resultType="HotelVO">
+		SELECT B.${hotelId},
+		B.${hotelName}, B.${hotelContent},
+		B.${hotelAddress}, B.${reviewCnt},
+		B.${hotelImg}, B.{hotelStarAvg}, B.${heartCnt}
+		FROM (
+		SELECT ROWNUM
+		RN, A. * FROM (
+		SELECT * FROM ${hotelHotel}
+		ORDER BY ${hotelId} DESC
+		)A
+		)B WHERE
+		RN BETWEEN
+		#{start} AND #{end}
+	</select>
+	
+	<!-- 호텔 리뷰 많은순 전체 검색 -->
+	<select id="select_all_review_desc" resultType="HotelVO">
+		SELECT B.${hotelId},
+		B.${hotelName}, B.${hotelContent},
+		B.${hotelAddress}, B.${reviewCnt},
+		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
+		FROM (
+		SELECT ROWNUM
+		RN, A. * FROM (
+		SELECT * FROM ${hotelHotel}
+		ORDER BY ${reviewCnt}
+		DESC
+		)A
+		)B
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	 
+	<!-- 호텔 별점순 전체 검색 -->
+	<select id="select_all_star_avg_desc" resultType="HotelVO">
+		SELECT B.${hotelId}
+		B.${hotelName}, B.${hotelContent},
+		B.${hotelAddress}, B.${reviewCnt},
+		B.${hotelImg}, B.${hotelStarwAvg}, B.${heartCnt}
+		FROM (
+		SELECT ROWNUM
+		RN, A. * FROM (
+		SELECT * FROM ${hotelHotel}
+		ORDER BY ${hotelStarAvg}
+		DESC
+		)A
+		)B
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select> 
+	
+	<!-- 호텔 가나다 순 전체 검색 -->
+	<select id="select_all_hotel_name_asc" resultType="HotelVO">
+		SELECT B.${hotelId}
+		B.${hotelName}, B.${hotelContent},
+		B.${hotelAddress}, B.${reviewCnt},
+		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
+		FROM (
+		SELECT ROWNUM
+		RN, A. * FROM (
+		SELECT * FROM ${hotelHotel}
+		ORDER BY ${hotelName}
+		DESC
+		)A
+		)B
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<!-- 호텔 이름으로 검색  -->
+	<select id="select_by_hotel_name" resultType="HotelVO">
+		SELECT B.${hotelId}
+		B.${hotelName}, B.${hotelContent},
+		B.${hotelAddress}, B.${reviewCnt},
+		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
+		FROM (
+		SELECT ROWNUM
+		RN, A. * FROM (
+		SELECT * FROM ${hotelHotel}
+		WHERE ${hotelName}
+		LIKE
+		#{keyword}
+		ORDER BY ${hotelId} 
+		DESC
+		)A
+		)B
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
+</mapper>
