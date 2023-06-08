@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT B.${hotelId},
 		B.${hotelName}, B.${hotelContent},
 		B.${hotelAddress}, B.${reviewCnt},
-		B.${hotelImg}, B.{hotelStarAvg}, B.${heartCnt}
+		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
 		FROM (
 		SELECT ROWNUM
 		RN, A. * FROM (
@@ -48,10 +48,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 
 	<!-- 호텔 별점순 전체 검색 -->
 	<select id="select_all_star_avg_desc" resultType="HotelVO">
-		SELECT B.${hotelId}
+		SELECT B.${hotelId},
 		B.${hotelName}, B.${hotelContent},
 		B.${hotelAddress}, B.${reviewCnt},
-		B.${hotelImg}, B.${hotelStarwAvg}, B.${heartCnt}
+		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
 		FROM (
 		SELECT ROWNUM
 		RN, A. * FROM (
@@ -64,8 +64,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select> 
 	
 	<!-- 호텔 가나다 순 전체 검색 -->
-	<select id="select_all_hotel_name_asc" resultType="HotelVO">
-		SELECT B.${hotelId}
+	<select id="select_all_hotel_name_desc" resultType="HotelVO">
+		SELECT B.${hotelId},
 		B.${hotelName}, B.${hotelContent},
 		B.${hotelAddress}, B.${reviewCnt},
 		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
@@ -82,7 +82,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 호텔 이름으로 검색  -->
 	<select id="select_by_hotel_name" resultType="HotelVO">
-		SELECT B.${hotelId}
+		SELECT B.${hotelId},
 		B.${hotelName}, B.${hotelContent},
 		B.${hotelAddress}, B.${reviewCnt},
 		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
@@ -99,5 +99,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)B
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
-
+	
+	<!-- 전체 게시글 수 변환 -->
+	<select id="total_counnt" resultType="Integer">
+		SELECT COUNT(*) TOTAL_CNT
+		FROM ${hotelHotel}
+	</select>
+	
+	<!-- 리뷰 등록, 삭제가 일어날 때 리뷰 개수와 평균 별점 수정하는 쿼리 -->
+	<update id="update_review_cnt_and_hotel_review_star_avg">
+		UPDATE ${hotelHotel}
+		SET ${reviewCnt} = ${reviewCnt} +
+		#{amount},
+		${hotelStarAvg} = (
+		SELECT AVG(${reviewStar})
+		FROM ${review}
+		WHERE ${hotelId} = #{hotelId}
+		)
+		WHERE ${hotelId} = #{hotelId}
+	</update>
+	
+	<!-- 좋아요 등록, 삭제가 일어날 떄마다 호텔 테이블의 하트 개수 수정되는 쿼리 -->
+	<update id="update_heart_cnt">
+		UPDATE ${hotelHotel}
+		SET ${heartCnt} = ${heartCnt} +
+		#{amount}
+		WHERE ${hotelId} = #{hotelId}
+	</update>
+	
+	<!-- 내가 찜한 호텔 목록 조회 -->
+	<select id="select_by_heart" resultType="HotelVO">
+		SELECT * FROM ${hotelHotel} H
+		WHERE H.${hotelId}
+		IN (SELECT ${hotelId}
+			FROM ${heart}
+			WHERE ${memberId} = #{memberId})
+	</select>
 </mapper>
