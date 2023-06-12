@@ -8,7 +8,7 @@ import edu.spring.board.pageutil.PageCriteria;
 
 public interface HotelDAO {
 	
-	HotelVO select(int hoteId); // 호텔 상세 검색
+	HotelVO select(int hotelId); // 호텔 상세 검색
 	
 	List<HotelVO> selectAllByDefault(PageCriteria criteria); // 호텔 기본 전체 검색
 	
@@ -22,7 +22,7 @@ public interface HotelDAO {
 	
 	int getTotalCount(); // 전체 호텔 수 불러오기
 	
-	int updateReviewCntAndAvg(int amount, int hoteId); // 호텔 별점 등록, 삭제시 별점 평균 수정
+	int updateReviewCntAndAvg(int amount, int hotelId); // 호텔 별점 등록, 삭제시 별점 평균 수정
 	
 	int updateHeartCnt(int amount, int hotelId); // 하트 등록, 삭제시 하트 카운트 수정
 	

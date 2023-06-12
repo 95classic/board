@@ -21,66 +21,89 @@ public class HotelDAOImple implements HotelDAO{
 	
 	private static final String NAMESPACE = 
 			"edu.spring.board.HotelMapper";
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	@Override
-	public HotelVO select(int hoteId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public HotelVO select(int hotelId) {
+		logger.info("select() 호출 : hotelId = " + hotelId);
+		return sqlSession.selectOne(NAMESPACE + "select_by_hotel_id",hotelId);
+	} // end select 상세 검색
 
 	@Override
 	public List<HotelVO> selectAllByDefault(PageCriteria criteria) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		logger.info("selectAllByDefault()호출");
+		logger.info("strat = " + criteria.getStart());
+		logger.info("end = " + criteria.getEnd());
+		return sqlSession.selectList(NAMESPACE + "select_all_default", criteria);
+	} // selectAllByDefault 전체 검색 기본
 
 	@Override
 	public List<HotelVO> selectAllByReviewDesc(PageCriteria criteria) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		logger.info("selectAllByReviewDesc()호출");
+		logger.info("start = " + criteria.getStart());
+		logger.info("end = " + criteria.getEnd());
+		return sqlSession.selectList(NAMESPACE + "select_all_review_desc", criteria);
+	} // end selectAllByReviewDesc 전체 검색 리뷰순
 
 	@Override
 	public List<HotelVO> selectAllByStarAvgDesc(PageCriteria criteria) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		logger.info("selectAllByStarAvgDesc() 호출");
+		logger.info("start = " + criteria.getStart());
+		logger.info("end = " + criteria.getEnd());
+		return sqlSession.selectList(NAMESPACE + "select_all_star_avg_desc", criteria);
+	} // end selectAllByStarAvgDesc 별점 평균 순서로 전체 검색
 
 	@Override
 	public List<HotelVO> selectAllByHotelNameDesc(PageCriteria criteria) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		logger.info("selectAllByHotelNameDesc()호출");
+		logger.info("start = " + criteria.getStart());
+		logger.info("end = " + criteria.getEnd());
+		return sqlSession.selectList(NAMESPACE + "select_all_hotel_name_desc", criteria);
+	} // end selectAllByHotelNameDesc 이름순 전체 검색 
 
 	@Override
 	public List<HotelVO> selectByHotelName(String keyword, PageCriteria criteria) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		logger.info("selectByHotelName() 호출 : keyword = " + keyword);
+		Map<String, Object> args = new HashMap<>();
+		args.put("keyword", "%" + keyword + "%");
+		args.put("start", criteria.getStart());
+		args.put("end", criteria.getEnd());
+		return sqlSession.selectList(NAMESPACE + "select_by_hotel_name", args);
+	} // selelctByHotelName 호텔 이름으로 검색
 
 	@Override
 	public int getTotalCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		logger.info("getTotalCounts()호출");
+		return sqlSession.selectOne(NAMESPACE + "total_counnt");
+	} // end getTotalCount 전체 호텔 수 불러오기 
 
 	@Override
-	public int updateReviewCntAndAvg(int amount, int hoteId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public int updateReviewCntAndAvg(int amount, int hotelId) {
+		logger.info("updateReviewCntAndAvg()호출");
+		logger.info("amout = " + amount);
+		logger.info("hotelId = " + hotelId);
+		Map<String, Object> args = new HashMap<>();
+		args.put("amount", amount);
+		args.put("hotelId", hotelId);
+		return sqlSession.update(NAMESPACE + "update_review_cnt_and_hotel_review_star_avg", args);
+	} // end udpateReviewCntAndAvg 리뷰 등록 삭제시 평균 별점과 리뷰 개수 수정 
 
 	@Override
 	public int updateHeartCnt(int amount, int hotelId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		logger.info("updateHeartCnt() 호출" );
+		Map<String, Object> args = new HashMap<>();
+		args.put("amount", amount);
+		args.put("hotelId", hotelId);
+		return sqlSession.update(NAMESPACE + "update_heart_cnt", args);
+	} // end updateHeartCnt 좋요아 등록 삭제시 하트 개수 업데이트 
 
 	@Override
 	public List<HotelVO> selectByHeart(String memberId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		logger.info("selectByHeart() 호출 : memberId = " + memberId);
+		return sqlSession.selectList(NAMESPACE + ".select_by_heart", memberId);
+	} // end selectByHeart 찜 목록 (하트 누른 게시물)
 			
 	
 	

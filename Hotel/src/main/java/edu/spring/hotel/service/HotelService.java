@@ -8,21 +8,21 @@ import edu.spring.hotel.pageutil.PageCriteria;
 
 // CRUD(Create, Read, Update, Delete)
 public interface HotelService {
-	HotelVO read(int hotelId); // ìƒì„¸ ê²€ìƒ‰
+	HotelVO read(int hotelId); // »ó¼¼ °Ë»ö
 	
-	List<HotelVO> read(PageCriteria criteria); // ì „ì²´ ê²€ìƒ‰ (í˜ì´ì§• ì²˜ë¦¬)
+	List<HotelVO> read(PageCriteria criteria); // ÀüÃ¼ °Ë»ö (ÆäÀÌÂ¡ Ã³¸®)
 	
-	List<HotelVO> readOrderByReviewDesc(PageCriteria criteria); // ë¦¬ë·°ìˆœ ë‚´ë¦¼ì°¨ìˆœ ì „ì²´ ê²€ìƒ‰
+	List<HotelVO> readOrderByReviewDesc(PageCriteria criteria); // ¸®ºä¼ø ³»¸²Â÷¼ø ÀüÃ¼ °Ë»ö
 	
-	List<HotelVO> readOrderByReviewAvgDesc(PageCriteria criteria); // í‰ê·  ë³„ì  ë‚´ë¦¼ì°¨ìˆœ ì „ì²´ê²€ìƒ‰
+	List<HotelVO> readOrderByReviewAvgDesc(PageCriteria criteria); // Æò±Õ º°Á¡ ³»¸²Â÷¼ø ÀüÃ¼°Ë»ö
 	
-	List<HotelVO> readOrderByHotelNameAsc(PageCriteria criteria); // ê°€ë‚˜ë‹¤ ë‚´ë¦¼ì°¨ìˆœ ì „ì²´ê²€ìƒ‰
+	List<HotelVO> readOrderByHotelNameAsc(PageCriteria criteria); // °¡³ª´Ù ³»¸²Â÷¼ø ÀüÃ¼°Ë»ö
 	
-	List<HotelVO> readByHotelName(String keyword, PageCriteria criteria); // í˜¸í…” ì´ë¦„ í‚¤ì›Œë“œë¡œ ê²€ìƒ‰
+	List<HotelVO> readByHotelName(String keyword, PageCriteria criteria); // È£ÅÚ ÀÌ¸§ Å°¿öµå·Î °Ë»ö
 	
-	int getTotalCounts(); //  ì „ì²´ í˜¸í…” ìˆ˜ ë°›ì•„ì˜¤ê¸° 
+	int getTotalCounts(); //  ÀüÃ¼ È£ÅÚ ¼ö ¹Ş¾Æ¿À±â 
 	
-	List<HotelVO> readByHeart(String memberId); // ë‚´ê°€ ì°œí•œ í˜¸í…” ëª©ë¡ ì¡°íšŒ
+	List<HotelVO> readByHeart(String memberId); // ³»°¡ ÂòÇÑ È£ÅÚ ¸ñ·Ï Á¶È¸
 
 
 } // end HotelService
