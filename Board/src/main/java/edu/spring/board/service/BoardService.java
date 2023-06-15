@@ -7,13 +7,14 @@ import edu.spring.board.pageutil.PageCriteria;
 
 // CRUD(Create, Read, Update, Delete)
 public interface BoardService {
-	int create(BoardVO vo); //  ë“±ë¡
-	List<BoardVO> read(PageCriteria criteria); // ì „ì²´ê²€ìƒ‰
-	List<BoardVO> readByTitleOrContent(String keyword, int start, int end);// ì œëª©,ë‚´ìš© ê²€ìƒ‰
-	List<BoardVO> readByMemberId(String keyword, int start, int end); // ì‘ì„±ì ê²€ìƒ‰
-	BoardVO read(int boardId);// ìƒì„¸ê²€ìƒ‰
-	int update(BoardVO vo); // ìˆ˜ì •
-	int delete(int boardId); // ì‚­ì œ
-	int getTotalCounts(); // ì´ ê²Œì‹œê¸€ ìˆ˜ 
+	int create(BoardVO vo); //  µî·Ï
+	List<BoardVO> read(PageCriteria criteria); // ÀüÃ¼°Ë»ö
+	List<BoardVO> readByTitleOrContent(String keyword, int start, int end);// Á¦¸ñ,³»¿ë °Ë»ö
+	List<BoardVO> readByMemberId(String keyword, int start, int end); // ÀÛ¼ºÀÚ °Ë»ö
+	BoardVO read(int boardId);// »ó¼¼°Ë»ö
+	int update(BoardVO vo); // ¼öÁ¤
+	int delete(int boardId); // »èÁ¦
+	int getTotalCounts(); // ÃÑ °Ô½Ã±Û ¼ö 
+	List<BoardVO> readByHeart(String memberId); // ÁÁ¾Æ¿äÇÑ ¸ñ·Ï
 
 } // end BoardService

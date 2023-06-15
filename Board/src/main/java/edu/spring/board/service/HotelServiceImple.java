@@ -62,12 +62,7 @@ public class HotelServiceImple implements HotelService{
 		return dao.getTotalCount();
 	} // end getTotalCounts 전체 호텔 수 불러오기 
 
-	@Override
-	public List<HotelVO> readByHeart(String memberId) {
-		logger.info("readByHeart()호출");
-		return dao.selectByHeart(memberId);
-	} // end readByHeart 좋아요 개수 불러오기 
-
+	
 
 
 }

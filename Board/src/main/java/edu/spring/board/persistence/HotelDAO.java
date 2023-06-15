@@ -24,8 +24,6 @@ public interface HotelDAO {
 	
 	int updateReviewCntAndAvg(int amount, int hotelId); // 호텔 별점 등록, 삭제시 별점 평균 수정
 	
-	int updateHeartCnt(int amount, int hotelId); // 하트 등록, 삭제시 하트 카운트 수정
-	
-	List<HotelVO> selectByHeart(String memberId); // 사용자가 찜한 호텔목록 전체 검색 
+
 
 }

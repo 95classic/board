@@ -47,14 +47,11 @@ li {
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a href="/hotel">
-          <img src="<spring:url value="/resources/hotelImg/main.png"/>">
-        </a>
+
       </div>
       <ul class="nav navbar-nav">
-        <li><a href="myReservation">내 예약 목록</a></li>
-        <li><a href="myWanted">내 찜 목록</a></li>
-        <li><a href="myActivity">내 활동 내역</a></li>
+		<li><a href="/board/board/list">게시판</a></li>
+        <li><a href="myWanted">내 좋아요 목록</a></li>
         <li><a href="update">내 정보 수정</a></li>
         <li><a href="delete">회원 탈퇴</a></li>
         <li><a href="logout">로그아웃</a></li>

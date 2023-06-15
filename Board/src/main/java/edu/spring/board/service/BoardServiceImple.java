@@ -12,11 +12,11 @@ import edu.spring.board.pageutil.PageCriteria;
 import edu.spring.board.persistence.BoardDAO;
 
 @Service // @Component
-// * ì„œë¹„ìŠ¤ ê³„ì¸µ(Service/Business Laye)
-// - í‘œí˜„ ê³„ì¸µ(presentation Layer)ê³¼ ì˜ì† ê³„ì¸µ(persistence Layer)ì‚¬ì´ë¥¼
-//   ì—°ê²°í•˜ì—¬ ë‘ ê³„ì¸µì´ ì§ì ‘ì ìœ¼ë¡œ í†µì‹ í•˜ì§€ ì•Šë„ë¡ í•˜ëŠ” ì—­í• 
-// - íŠ¸ëœì­ì…˜(tranaction)ê´€ë¦¬
-// - DBì™€ ìƒê´€ì—†ì´ ë°ì´í„°ë¥¼ ì²˜ë¦¬ ê°€ëŠ¥
+// * ¼­ºñ½º °èÃş(Service/Business Laye)
+// - Ç¥Çö °èÃş(presentation Layer)°ú ¿µ¼Ó °èÃş(persistence Layer)»çÀÌ¸¦
+//   ¿¬°áÇÏ¿© µÎ °èÃşÀÌ Á÷Á¢ÀûÀ¸·Î Åë½ÅÇÏÁö ¾Êµµ·Ï ÇÏ´Â ¿ªÇÒ
+// - Æ®·£Àè¼Ç(tranaction)°ü¸®
+// - DB¿Í »ó°ü¾øÀÌ µ¥ÀÌÅÍ¸¦ Ã³¸® °¡´É
 
 public class BoardServiceImple implements BoardService{
 	private static final Logger logger = 
@@ -27,54 +27,60 @@ public class BoardServiceImple implements BoardService{
 	
 	@Override
 	public int create(BoardVO vo) {
-		logger.info("create()í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("create()È£Ãâ : vo = " + vo.toString());
 		return dao.insert(vo);
 	} // end create
 
 	@Override
 	public List<BoardVO> read(PageCriteria criteria) {
-		logger.info("read() í˜¸ì¶œ");
+		logger.info("read() È£Ãâ");
 		logger.info("start = " + criteria.getStart());
 		logger.info("end = " + criteria.getEnd());
 		return dao.select(criteria);
-	} // end readPaging í˜ì´ì§•ì²˜ë¦¬
+	} // end readPaging ÆäÀÌÂ¡Ã³¸®
 
 	@Override
 	public BoardVO read(int boardId) {
-		logger.info("read() í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("read() È£Ãâ : boardId = " + boardId);
 		return dao.select(boardId);
-	} // end read ìƒì„¸ ê²€ìƒ‰
+	} // end read »ó¼¼ °Ë»ö
 
 	@Override
 	public int update(BoardVO vo) {
-		logger.info("update()í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("update()È£Ãâ : vo = " + vo.toString());
 		return dao.update(vo);
-	} // end update ìˆ˜ì •
+	} // end update ¼öÁ¤
 
 	@Override
 	public int delete(int boardId) {
-		logger.info("delete()í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("delete()È£Ãâ : boardId = " + boardId);
 		return dao.delete(boardId);
-	} // end delete ì‚­ì œ
+	} // end delete »èÁ¦
 
 	@Override
 	public int getTotalCounts() {
-		logger.info("getTotalCounts() í˜¸ì¶œ");
+		logger.info("getTotalCounts() È£Ãâ");
 		return dao.getTotalCounts();
-	} // end getTotalCounts ì´ ê²Œì‹œêµ´ ìˆ˜
+	} // end getTotalCounts ÃÑ °Ô½Ã±¼ ¼ö
 
 	@Override
 	public List<BoardVO> readByTitleOrContent(String keyword, int start, int end) {
-		logger.info("readByTitleOrContent");
+		logger.info("readByTitleOrContent()È£Ãâ");
 		PageCriteria criteria = new PageCriteria(start, end);
 		return dao.selectByTitleOrContent(keyword, criteria.getStart(), criteria.getEnd());
-	} // end readByTitleOrContent ì œëª© ë‚´ìš©ìœ¼ë¡œ ê²€ìƒ‰
+	} // end readByTitleOrContent Á¦¸ñ ³»¿ëÀ¸·Î °Ë»ö
 
 	@Override
 	public List<BoardVO> readByMemberId(String keyword, int start, int end) {
-		logger.info("readByMemberId");
+		logger.info("readByMemberId()È£Ãâ");
 		PageCriteria criteria = new PageCriteria(start, end);
 		return dao.selectByMemberId(keyword, criteria.getStart(), criteria.getEnd());
-	} // end readByMemberId ì‘ì„±ìë¡œ ê²€ìƒ‰
+	} // end readByMemberId ÀÛ¼ºÀÚ·Î °Ë»ö
+
+	@Override
+	public List<BoardVO> readByHeart(String memberId) {
+		logger.info("readByHeart()È£Ãâ memberId = " + memberId);
+		return dao.selectByHeart(memberId);
+	} // end readByHeart ÁÁ¾Æ¿ä ¸ñ·Ï 
 
 }

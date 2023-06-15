@@ -93,17 +93,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where ${boardId} = #{boardId}
 	 </update>
 	 
+	 
+	 <!-- 내 게시글 수 조회 -->
+	 <select id="select_board_cnt" resultType="Integer">
+	 	select count(*) from ${boardBoard}
+	 	where ${memberId} = #{memberId}	 	
+	 </select>
+	 
 	 <!-- 하트 등록, 삭제시 갯수 수정 -->
 	 <update id="update_heart_cnt">
 	 	update ${boardBoard}
 	 	set ${heartCnt} = ${heartCnt} + #{amount}
 	 	where ${boardId} = #{boardId}
 	 </update>
-	 
-	 <!-- 내 게시글 수 조회 -->
-	 <select id="select_board_cnt" resultType="Integer">
-	 	select count(*) from ${boardBoard}
-	 	where ${memberId} = #{memberId}	 	
+
+	 <!-- 찜한 게시물 조회 -->
+	 <select id="select_by_heart" resultType="BoardVO">
+	 	select * from ${boardBoard} H
+	 	where H.${boardId}
+	 	IN (select ${boardId} form ${heartHeart} where ${memberId} = #{memberId})
 	 </select>
 	 
 	 

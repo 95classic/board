@@ -29,8 +29,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 		 <property name="hotelAddress" value="HOTEL_ADDRESS"/>
 		 <property name="reviewCnt" value="REVIEW_CNT"/>
 		 <property name="hotelImg" value="HOTEL_IMG"/>
-		 <property name="hotelReviewAvg" value="HOTEL_REVIEW_AVG"/>
-		 <property name="heartCnt" value="HEART_CNT"/>
+		 <property name="hotelStarAvg" value="HOTEL_STAR_AVG"/>
+
 		 
 		 <!-- REPLYREPLY 테이블 -->
 		 <property name="replyReply" value="REPLYREPLY"/>

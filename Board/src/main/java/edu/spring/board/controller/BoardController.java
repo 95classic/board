@@ -20,9 +20,9 @@ import edu.spring.board.pageutil.PageMaker;
 import edu.spring.board.service.BoardService;
 
 @Controller // @Component
-// * í‘œí˜„ ê³„ì¸µ(Presentation Layer)
-// - view(í˜ì´ì§€)ì™€ serviceë¥¼ ì—°ê²°í•˜ëŠ” ì—­í• 
-// - requestì— ëŒ€í•œ responseë¥¼ ì „ë‹¬í•˜ëŠ” ì—­í• 
+// * Ç¥Çö °èÃş(Presentation Layer)
+// - view(ÆäÀÌÁö)¿Í service¸¦ ¿¬°áÇÏ´Â ¿ªÇÒ
+// - request¿¡ ´ëÇÑ response¸¦ Àü´ŞÇÏ´Â ¿ªÇÒ
 @RequestMapping(value="/board") // url 
 public class BoardController {
 	private static final Logger logger = 
@@ -33,11 +33,11 @@ public class BoardController {
 	
 	@GetMapping("/list")
 	public void list(Model model, Integer page, Integer numsPerPage) {
-		logger.info("list()í˜¸ì¶œ");
+		logger.info("list()È£Ãâ");
 		logger.info("page = " + page + ", numsPerPage = " + numsPerPage);
 		
-		// paging ì²˜ë¦¬ 
-		// null ìƒíƒœê°€ ì•„ë‹ë•Œë§Œ ë°ì´í„° ë‚¨ê²¨ì¤€ë‹¤ëŠ” ë‚´ìš©
+		// paging Ã³¸® 
+		// null »óÅÂ°¡ ¾Æ´Ò¶§¸¸ µ¥ÀÌÅÍ ³²°ÜÁØ´Ù´Â ³»¿ë
 		PageCriteria criteria = new PageCriteria();
 		if(page != null) {
 			criteria.setPage(page);
@@ -72,14 +72,14 @@ public class BoardController {
 	@PostMapping("/register")
 	public String registerPOST(BoardVO vo, RedirectAttributes reAttr) {
 		// RedirectAttributes
-		// - ìƒˆë¡œìš´ ê²½ë¡œì— ì†ì„±ê°’ì„ ì „ì†¡í•˜ëŠ” ê°ì²´
+		// - »õ·Î¿î °æ·Î¿¡ ¼Ó¼º°ªÀ» Àü¼ÛÇÏ´Â °´Ã¼
 		
-		logger.info("registerPOST() í˜¸ì¶œ");
+		logger.info("registerPOST() È£Ãâ");
 		logger.info(vo.toString());
 		int result = boardService.create(vo);
-		logger.info(result + "í–‰ ì‚½ì…");
+		logger.info(result + "Çà »ğÀÔ");
 		if(result == 1) {
-			// í‚¤ - ê°’ ì „ì†¡
+			// Å° - °ª Àü¼Û
 			reAttr.addFlashAttribute("result", "success");
 			return "redirect:/board/list";
 		} else {
@@ -89,7 +89,7 @@ public class BoardController {
 	
 	@GetMapping("/detail")
 	public void detail(Model model, Integer boardId, Integer page) {
-		logger.info("detail() í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("detail() È£Ãâ : boardId = " + boardId);
 		BoardVO vo = boardService.read(boardId);
 		model.addAttribute("vo", vo);
 		model.addAttribute("page", page);
@@ -97,7 +97,7 @@ public class BoardController {
 	
 	@GetMapping("/update")
 	public void updateGET(Model model, Integer boardId, Integer page) {
-		logger.info("updateGET() í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("updateGET() È£Ãâ : boardId = " + boardId);
 		BoardVO vo = boardService.read(boardId);
 		model.addAttribute("vo", vo);
 		model.addAttribute("page", page);
@@ -105,7 +105,7 @@ public class BoardController {
 	
 	@PostMapping("/update")
 	public String updatePOST(BoardVO vo, Integer page, RedirectAttributes reAttr) {
-		logger.info("updatePOST() í˜¸ì¶œ : vo " + vo.toString());
+		logger.info("updatePOST() È£Ãâ : vo " + vo.toString());
 		int result = boardService.update(vo);
 		if(result == 1) {
 			reAttr.addFlashAttribute("result", "updateSuccess");
@@ -117,7 +117,7 @@ public class BoardController {
 	
 	@PostMapping("/delete")
 	public String delete(Integer boardId, RedirectAttributes reAttr) {
-		logger.info("detete()í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("detete()È£Ãâ : boardId = " + boardId);
 		int result = boardService.delete(boardId);
 		if(result == 1) {
 			reAttr.addFlashAttribute("result", "deleteSuccess");
@@ -129,12 +129,12 @@ public class BoardController {
 	
 	@GetMapping("search")
 	public String titleOrContentSearch(Model model, String keyword, String searchType, Integer page, Integer numsPerPage) {
-		logger.info("titleOrContentSearch() í˜¸ì¶œ");
+		logger.info("titleOrContentSearch() È£Ãâ");
 		logger.info("page = " + page + ", numsPerPage = " + numsPerPage);
 		logger.info(searchType);
 		
-		//í˜ì´ì§• ì²˜ë¦¬ 
-		// null ìƒíƒœê°€ ì•„ë‹ë•Œë§Œ ë°ì´í„° ë‚¨ê²¨ì¤€ë‹¤ëŠ” ë‚´ìš©
+		//ÆäÀÌÂ¡ Ã³¸® 
+		// null »óÅÂ°¡ ¾Æ´Ò¶§¸¸ µ¥ÀÌÅÍ ³²°ÜÁØ´Ù´Â ³»¿ë
 		PageCriteria criteria = new PageCriteria();
 		if(page != null) {
 			criteria.setPage(page);

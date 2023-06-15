@@ -14,7 +14,7 @@ import edu.spring.board.domain.BoardVO;
 import edu.spring.board.domain.HotelVO;
 import edu.spring.board.pageutil.PageCriteria;
 
-
+@Repository
 public class HotelDAOImple implements HotelDAO{
 	private static final Logger logger = 
 			LoggerFactory.getLogger(HotelDAOImple.class);
@@ -90,21 +90,6 @@ public class HotelDAOImple implements HotelDAO{
 		return sqlSession.update(NAMESPACE + "update_review_cnt_and_hotel_review_star_avg", args);
 	} // end udpateReviewCntAndAvg 리뷰 등록 삭제시 평균 별점과 리뷰 개수 수정 
 
-	@Override
-	public int updateHeartCnt(int amount, int hotelId) {
-		logger.info("updateHeartCnt() 호출" );
-		Map<String, Object> args = new HashMap<>();
-		args.put("amount", amount);
-		args.put("hotelId", hotelId);
-		return sqlSession.update(NAMESPACE + "update_heart_cnt", args);
-	} // end updateHeartCnt 좋요아 등록 삭제시 하트 개수 업데이트 
-
-	@Override
-	public List<HotelVO> selectByHeart(String memberId) {
-		logger.info("selectByHeart() 호출 : memberId = " + memberId);
-		return sqlSession.selectList(NAMESPACE + ".select_by_heart", memberId);
-	} // end selectByHeart 찜 목록 (하트 누른 게시물)
-			
 	
 	
 	

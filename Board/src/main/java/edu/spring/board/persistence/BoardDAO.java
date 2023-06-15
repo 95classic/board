@@ -6,17 +6,18 @@ import edu.spring.board.domain.BoardVO;
 import edu.spring.board.pageutil.PageCriteria;
 
 public interface BoardDAO {
-	int insert(BoardVO vo); // ë“±ë¡
-	List<BoardVO> selectAllDefault(); // ì „ì²´ ì¶œë ¥ ê¸°ë³¸
-	List<BoardVO> selectAllReplyCnt(); // ì „ì²´ ê²€ìƒ‰ ëŒ“ê¸€ìˆœ
-	BoardVO select(int boardId); // ìƒì„¸ ì¶œë ¥
-	int update(BoardVO vo); // ìˆ˜ì •
-	int delete(int boardId); //ì‚­ì œ
-	List<BoardVO> selectByTitleOrContent(String keyword, int start, int end); // ì œëª©ì´ë‘ ë‚´ìš©ìœ¼ë¡œ ê²€ìƒ‰
-	List<BoardVO> selectByMemberId(String keyword, int start, int end); // ì‘ì„±ìë¡œ ê²€ìƒ‰
-	List<BoardVO> select(PageCriteria criteria); // í˜ì´ì§• ì²˜ë¦¬
-	int getTotalCounts(); //  ì´ ê²Œì‹œê¸€ ìˆ˜
-	int updateReplyCnt(int amount, int boardId); // ê²Œì‹œíŒ ëŒ“ê¸€ ê°œìˆ˜ ì—…ë°ì´íŠ¸
-	int selectBoardCnt(String memberId); // ê²Œì‹œê¸€ ì¡°íšŒ
-	int updateHeartCnt(int amount, int boardId);
+	int insert(BoardVO vo); // µî·Ï
+	List<BoardVO> selectAllDefault(); // ÀüÃ¼ Ãâ·Â ±âº»
+	List<BoardVO> selectAllReplyCnt(); // ÀüÃ¼ °Ë»ö ´ñ±Û¼ø
+	BoardVO select(int boardId); // »ó¼¼ Ãâ·Â
+	int update(BoardVO vo); // ¼öÁ¤
+	int delete(int boardId); //»èÁ¦
+	List<BoardVO> selectByTitleOrContent(String keyword, int start, int end); // Á¦¸ñÀÌ¶û ³»¿ëÀ¸·Î °Ë»ö
+	List<BoardVO> selectByMemberId(String keyword, int start, int end); // ÀÛ¼ºÀÚ·Î °Ë»ö
+	List<BoardVO> select(PageCriteria criteria); // ÆäÀÌÂ¡ Ã³¸®
+	int getTotalCounts(); //  ÃÑ °Ô½Ã±Û ¼ö
+	int updateReplyCnt(int amount, int boardId); // °Ô½ÃÆÇ ´ñ±Û °³¼ö ¾÷µ¥ÀÌÆ®
+	int selectBoardCnt(String memberId); // °Ô½Ã±Û Á¶È¸
+	int updateHeartCnt(int amount, int boardId); // ÇÏÆ® °³¼ö ¼öÁ¤
+	List<BoardVO> selectByHeart(String memberId); // »ç¿ëÀÚ°¡ ÂòÇÑ °Ô½ÃÆÇ ¸ñ·Ï ÀüÃ¼°Ë»ö
 }

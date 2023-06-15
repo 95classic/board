@@ -20,7 +20,6 @@ public interface HotelService {
 	List<HotelVO> readByHotelName(String keyword, PageCriteria criteria); // 호텔 이름으로 검색
 	
 	int getTotalCounts(); // 전체 호텔 수 받아오기 
-	
-	List<HotelVO> readByHeart(String memberId); // 내가 찜한 호텔 목록 조회
+
 	
 } // end HotelService

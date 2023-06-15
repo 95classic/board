@@ -14,10 +14,10 @@ import edu.spring.board.domain.BoardVO;
 import edu.spring.board.pageutil.PageCriteria;
 
 @Repository // @Componet
-// - ì˜ì†¡ ê³„ì¸µ(Persistence Layer)ì˜ DBì™€ ê´€ë ¨ ê¸°ëŠ¥ì„ ë‹´ë‹¹
-// - Spring Component beanìœ¼ë¡œ ë“±ë¡œê°›ã…
-// - servlet-context.xmlì˜ component-scanì„ í†µí•´
-// 	 ì„¤ì •ëœ Componentë¥¼ ì°¾ì•„ì™€ beanìœ¼ë¡œ ë“±ë¡
+// - ¿µ¼Û °èÃş(Persistence Layer)ÀÇ DB¿Í °ü·Ã ±â´ÉÀ» ´ã´ç
+// - Spring Component beanÀ¸·Î µî·Î°²¤±
+// - servlet-context.xmlÀÇ component-scanÀ» ÅëÇØ
+// 	 ¼³Á¤µÈ Component¸¦ Ã£¾Æ¿Í beanÀ¸·Î µî·Ï
 // - <context:component-scan ../>
 public class BoardDAOImple implements BoardDAO{
 	private static final Logger logger = 
@@ -25,107 +25,112 @@ public class BoardDAOImple implements BoardDAO{
 	private static final String NAMESPACE =
 			"edu.spring.board.BoardMapper";
 	
-	// MyBatisì˜ sqlSessionì„ ì‚¬ìš©í•˜ê¸° ìœ„í•´
-	// ìŠ¤í”„ë§ í”„ë ˆì„ì›Œí¬ê°€ ìƒì„±í•œ beanì„ ì£¼ì…(injection)ë°›ìŒ
+	// MyBatisÀÇ sqlSessionÀ» »ç¿ëÇÏ±â À§ÇØ
+	// ½ºÇÁ¸µ ÇÁ·¹ÀÓ¿öÅ©°¡ »ı¼ºÇÑ beanÀ» ÁÖÀÔ(injection)¹ŞÀ½
 	@Autowired
 	private SqlSession sqlSession;
 
 	@Override
 	public int insert(BoardVO vo) {
-		logger.info("insert()í˜¸ì¶œ");
+		logger.info("insert()È£Ãâ");
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	} // end insert
 
 	@Override
 	public List<BoardVO> selectAllDefault() {
-		logger.info("select() í˜¸ì¶œ");
+		logger.info("select() È£Ãâ");
 		return sqlSession.selectList(NAMESPACE + ".select_all_default");
 	} // end selectAllDefault
 
 	@Override
 	public List<BoardVO> selectAllReplyCnt() {
-		logger.info("select() í˜¸ì¶œ");
+		logger.info("select() È£Ãâ");
 		return sqlSession.selectList(NAMESPACE + ".select_all_reply_cnt");
 	} // end selectAllReplyCnt
 
 	@Override
 	public BoardVO select(int boardId) {
-		logger.info("select()í˜¸ì¶œ : boardId = " + boardId );
+		logger.info("select()È£Ãâ : boardId = " + boardId );
 		return sqlSession.selectOne(NAMESPACE + ".select_by_board_id", boardId);
 	} // end select_by_boardId
 
 	@Override
 	public int update(BoardVO vo) {
-		logger.info("update()í˜¸ì¶œ");
+		logger.info("update()È£Ãâ");
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	} // end update
 
 	@Override
 	public int delete(int boardId) {
-		logger.info("delete()í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("delete()È£Ãâ : boardId = " + boardId);
 		return sqlSession.delete(NAMESPACE + ".delete", boardId);
 	} // end delete
 
 	@Override
 	public List<BoardVO> selectByTitleOrContent(String keyword, int start, int end) {
-		logger.info("selectByTitleOrContent()í˜¸ì¶œ : keyword = " + keyword);
+		logger.info("selectByTitleOrContent()È£Ãâ : keyword = " + keyword);
 		PageCriteria criteria = new PageCriteria(start, end);
 		Map<String, Object> args = new HashMap<>();
 		args.put("keyword", "%" + keyword + "%");
 		args.put("start", criteria.getStart());
 		args.put("end", criteria.getEnd());
 		return sqlSession.selectList(NAMESPACE + ".select_by_title_content", args);
-	} // end selectByTitleOrContent ì œëª© ë˜ëŠ” ë‚´ìš©ìœ¼ë¡œ ê²€ìƒ‰
+	} // end selectByTitleOrContent Á¦¸ñ ¶Ç´Â ³»¿ëÀ¸·Î °Ë»ö
 
 	@Override
 	public List<BoardVO> selectByMemberId(String keyword, int start, int end) {
-		logger.info("select()í˜¸ì¶œ : keyword = " + keyword);
+		logger.info("select()È£Ãâ : keyword = " + keyword);
 		PageCriteria criteria = new PageCriteria(start, end);
 		Map<String, Object> args = new HashMap<>();
 		args.put("keyword", "%" + keyword + "%");
 		args.put("strat", criteria.getStart());
 		args.put("end", criteria.getEnd());
 		return sqlSession.selectList(NAMESPACE + ".select_by_member_id", args);
-	} // end selectMemberId ì‘ì„±ìë¡œ ê²€ìƒ‰ 
+	} // end selectMemberId ÀÛ¼ºÀÚ·Î °Ë»ö 
 
 	@Override
 	public List<BoardVO> select(PageCriteria criteria) {
-		logger.info("select()í˜¸ì¶œ");
+		logger.info("select()È£Ãâ");
 		logger.info("start = " + criteria.getStart());
 		logger.info("end = " + criteria.getEnd());
 		return sqlSession.selectList(NAMESPACE + ".paging", criteria);
-	} // end selectPaging  í˜ì´ì§• ì²˜ë¦¬ 
+	} // end selectPaging  ÆäÀÌÂ¡ Ã³¸® 
 
 	@Override
 	public int getTotalCounts() {
 		logger.debug("getTotalCounts()");
 		return sqlSession.selectOne(NAMESPACE + ".total_count");
-	} // end getTotalCounts ì´ ê²Œì‹œê¸€ ìˆ˜
+	} // end getTotalCounts ÃÑ °Ô½Ã±Û ¼ö
 
 
 	@Override
 	public int updateReplyCnt(int amount, int boardId) {
-		logger.info("updateReplyCnt()í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("updateReplyCnt()È£Ãâ : boardId = " + boardId);
 		Map<String, Integer> args = new HashMap<>();
 		args.put("amount", amount);
 		args.put("boardId", boardId);
 		return sqlSession.update(NAMESPACE + ".update_reply_cnt", args);
-	} // end updateReplyCnt ê²Œì‹œíŒ ëŒ“ê¸€ ìˆ˜ 
+	} // end updateReplyCnt °Ô½ÃÆÇ ´ñ±Û ¼ö 
 
 
 	@Override
 	public int selectBoardCnt(String memberId) {
-		logger.info("selectBoardCnt() í˜¸ì¶œ : memberId = " + memberId);
+		logger.info("selectBoardCnt() È£Ãâ : memberId = " + memberId);
 		return sqlSession.selectOne(NAMESPACE + ".select_board_cnt", memberId);
-	} // end selectBoardCnt ê²Œì‹œê¸€ ì¡°íšŒ
+	} // end selectBoardCnt °Ô½Ã±Û Á¶È¸
 
 	@Override
 	public int updateHeartCnt(int amount, int boardId) {
-		logger.info("updateHeartCnt() í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("updateHeartCnt() È£Ãâ : boardId = " + boardId);
 		Map<String , Object> args = new HashMap<>();
 		args.put("amount", amount);
 		args.put("boardId", boardId);
 		return sqlSession.update(NAMESPACE + ".update_heart_cnt",args);
-	} // end updateHeaertCnt ì¢‹ì•„ìš” ìˆ˜ ì¡°íšŒ 
-	
+	} // end updateHeaertCnt ÁÁ¾Æ¿ä ¼ö Á¶È¸ 
+
+	@Override
+	public List<BoardVO> selectByHeart(String memberId) {
+		logger.info("selectByHeart()È£Ãâ : memberId =" + memberId);
+		return sqlSession.selectList(NAMESPACE + "select_by_heart", memberId);
+	} // end selectByHeart ÁÁ¾Æ¿ä ¸ñ·Ï 
 }

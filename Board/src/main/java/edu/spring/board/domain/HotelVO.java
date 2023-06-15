@@ -8,14 +8,14 @@ public class HotelVO {
 	private int reviewCnt;
 	private String hotelImg;
 	private double hotelStarAvg;
-	private int heartCnt;
+	
 	
 	public HotelVO() {
 
 	}
 
 	public HotelVO(int hotelId, String hotelName, String hotelContent, String hotelAddress, int reviewCnt,
-			String hotelImg, double hotelStarAvg, int heartCnt) {
+			String hotelImg, double hotelStarAvg) {
 		super();
 		this.hotelId = hotelId;
 		this.hotelName = hotelName;
@@ -24,7 +24,6 @@ public class HotelVO {
 		this.reviewCnt = reviewCnt;
 		this.hotelImg = hotelImg;
 		this.hotelStarAvg = hotelStarAvg;
-		this.heartCnt = heartCnt;
 	}
 
 	public int getHotelId() {
@@ -83,20 +82,14 @@ public class HotelVO {
 		this.hotelStarAvg = hotelStarAvg;
 	}
 
-	public int getHeartCnt() {
-		return heartCnt;
-	}
-
-	public void setHeartCnt(int heartCnt) {
-		this.heartCnt = heartCnt;
-	}
-
 	@Override
 	public String toString() {
 		return "HotelVO [hotelId=" + hotelId + ", hotelName=" + hotelName + ", hotelContent=" + hotelContent
 				+ ", hotelAddress=" + hotelAddress + ", reviewCnt=" + reviewCnt + ", hotelImg=" + hotelImg
-				+ ", hotelStarAvg=" + hotelStarAvg + ", heartCnt=" + heartCnt + "]";
+				+ ", hotelStarAvg=" + hotelStarAvg + "]";
 	}
+
+	
 	
 	
 	
