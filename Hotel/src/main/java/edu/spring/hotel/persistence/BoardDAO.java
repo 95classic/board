@@ -6,29 +6,33 @@ import edu.spring.hotel.domain.BoardVO;
 import edu.spring.hotel.pageutil.PageCriteria;
 
 public interface BoardDAO {
-	// ê²Œì‹œê¸€ ë“±ë¡
-	int insert(BoardVO vo);
-	// ê²Œì‹œê¸€ ì „ì²´ê²€ìƒ‰(ê¸°ë³¸/ìµœì‹ ìˆœ)
-	List<BoardVO> selectAllDefault();
-	// ê²Œì‹œê¸€ ì „ì²´ê²€ìƒ‰(ëŒ“ê¸€ ë§ì€ ìˆœ)
-	List<BoardVO> selectAllReplyCnt();
-	// ê²Œì‹œê¸€ ìƒì„¸ê²€ìƒ‰
-	BoardVO select(int boardId);
-	// ê²Œì‹œê¸€ ìˆ˜ì •
-	int update(BoardVO vo);
-	// ê²Œì‹œê¸€ ì‚­ì œ
-	int delete(int boardId);
-	// ê²Œì‹œê¸€ ì œëª© ë˜ëŠ” ë‚´ìš©ì„ í‚¤ì›Œë“œë¡œ ê²€ìƒ‰
-	List<BoardVO> selectByTitleOrContent(String keyword, int start, int end);
-	// ê²Œì‹œê¸€ ì‘ì„±ìë¥¼ í‚¤ì›Œë“œë¡œ ê²€ìƒ‰
-	List<BoardVO> selectByMemberId(String keyword, int start, int end);
-	// í˜ì´ì§• ì²˜ë¦¬ë¥¼ ìœ„í•œ ì „ì²´ê²€ìƒ‰
-	List<BoardVO> select(PageCriteria criteria);
-	// ì „ì²´ ê²Œì‹œê¸€ ìˆ˜ ë¶ˆëŸ¬ì˜¤ê¸°
-	int getTotalCounts();
-	// ëŒ“ê¸€ ìˆ˜ì •, ì‚­ì œ ì‹œ ëŒ“ê¸€ ê°œìˆ˜ ìˆ˜ì •
-	int updateReplyCnt(int amount, int boardId);
-	// ë‚´ê°€ ì‘ì„±í•œ ê²Œì‹œê¸€ ìˆ˜ ì¡°íšŒ
-	int selectBoardCnt(String memberId);
-	
-} // end BoardDAO
+   // °Ô½Ã±Û µî·Ï
+   int insert(BoardVO vo);
+   // °Ô½Ã±Û ÀüÃ¼°Ë»ö(±âº»/ÃÖ½Å¼ø)
+   List<BoardVO> selectAllDefault();
+   // °Ô½Ã±Û ÀüÃ¼°Ë»ö(´ñ±Û ¸¹Àº ¼ø)
+   List<BoardVO> selectAllReplyCnt();
+   // °Ô½Ã±Û »ó¼¼°Ë»ö
+   BoardVO select(int boardId);
+   // °Ô½Ã±Û ¼öÁ¤
+   int update(BoardVO vo);
+   // °Ô½Ã±Û »èÁ¦
+   int delete(int boardId);
+   // °Ô½Ã±Û Á¦¸ñ ¶Ç´Â ³»¿ëÀ» Å°¿öµå·Î °Ë»ö
+   List<BoardVO> selectByTitleOrContent(String keyword, int start, int end);
+   // °Ô½Ã±Û ÀÛ¼ºÀÚ¸¦ Å°¿öµå·Î °Ë»ö
+   List<BoardVO> selectByMemberId(String keyword, int start, int end);
+   // ÆäÀÌÂ¡ Ã³¸®¸¦ À§ÇÑ ÀüÃ¼°Ë»ö
+   List<BoardVO> select(PageCriteria criteria);
+   // ÀüÃ¼ °Ô½Ã±Û ¼ö ºÒ·¯¿À±â
+   int getTotalCounts();
+   // Á¦¸ñ ¶Ç´Â ³»¿ëÀ¸·Î °Ë»öÇßÀ» ¶§ °Ô½Ã±Û ¼ö ºÒ·¯¿À±â
+   int getTotalCountsByTitleOrContent(String keyword);
+   // ÀÛ¼ºÀÚ ¾ÆÀÌµğ·Î °Ë»öÇßÀ» ¶§ °Ô½Ã±Û ¼ö ºÒ·¯¿À±â
+   int getTotalCountsByMemberId(String keyword);
+   // ´ñ±Û ¼öÁ¤, »èÁ¦ ½Ã ´ñ±Û °³¼ö ¼öÁ¤
+   int updateReplyCnt(int amount, int boardId);
+   // ³»°¡ ÀÛ¼ºÇÑ °Ô½Ã±Û ¼ö Á¶È¸
+   int selectBoardCnt(String memberId);
+   
+} // end BoardDAO 

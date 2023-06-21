@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 찜 목록</title>
+<title>좋아요 목록</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script
@@ -34,7 +34,7 @@
 	font-size: 20px;
 }
 
-.hotel-list {
+.board-list {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 20px;
@@ -44,7 +44,7 @@
 	margin-right: auto;
 }
 
-.hotel-item {
+.board-item {
 	width: calc(33.33% - 20px);
 	border: 1px solid #ccc;
 	border-radius: 5px;
@@ -52,32 +52,32 @@
 	text-align: center;
 }
 
-.hotel-item a {
+.board-item a {
 	text-decoration: none;
 }
 
-.hotel-item img {
+.board-item img {
 	width: 80%;
 	height: 200px;
 	object-fit: cover;
 	border-radius: 5px;
 }
 
-.hotel-item h3 {
+.board-item h3 {
 	margin-top: 10px;
 	font-size: 20px;
 }
 
-.hotel-item p {
+.board-item p {
 	margin: 5px 0;
 	color: #888;
 }
 
-.hotel-item .heart-icon {
+.board-item .heart-icon {
 	color: red;
 }
 
-.hotel-item .detail-link {
+.board-item .detail-link {
 	display: inline-block;
 	margin-top: 10px;
 	padding: 5px 10px;
@@ -88,7 +88,7 @@
 	transition: background-color 0.3s ease;
 }
 
-.hotel-item .detail-link:hover {
+.board-item .detail-link:hover {
 	background-color: #1b7aae;
 }
 
@@ -127,14 +127,11 @@ li {
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a href="/hotel"> <img
-					src="<spring:url value="/resources/hotelImg/main.png"/>">
-				</a>
+				
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="myReservation">내 예약 목록</a></li>
-				<li><a href="myWanted">내 찜 목록</a></li>
-				<li><a href="myActivity">내 활동 내역</a></li>
+				<li><a href="/board/board/list">게시판</a>
+				<li><a href="myWanted">내 좋아요 목록</a></li>
 				<li><a href="update">내 정보 수정</a></li>
 				<li><a href="delete">회원 탈퇴</a></li>
 				<li><a href="logout">로그아웃</a></li>
@@ -142,26 +139,26 @@ li {
 		</div>
 	</nav>
 
-	<h1>내 찜 목록</h1>
-	<div class="hotel-list">
+	<h1>좋아요 목록</h1>
+	<div class="board-list">
 		<c:forEach var="vo" items="${list}" varStatus="status">
-			<div class="hotel-item">
-				<a href="../detail?hotelId=${vo.hotelId}"> <img
-					src="<spring:url value='${vo.hotelImg}'/>">
+			<div class="board-item">
+				<a href="../detail?boardId=${vo.boardId}"> 
 				</a>
-				<h3>${vo.hotelName}</h3>
-				<p>${vo.reviewCnt}개의리뷰</p>
-				<p>별점 평균 (${vo.hotelReviewAvg}/5)</p>
+				<h3>${vo.boardTitle}</h3>
+				<p>${vo.boardContent }</p>
+				<p>${vo.replyCnt}개의 댓글</p>
 				<p>
 					<span id="heart" class="animated-heart">&#x2764;</span>
 					(${vo.heartCnt})
 				</p>
-				<a class="detail-link" href="../detail?hotelId=${vo.hotelId}">자세히
+				<!--href에서 = ../detail?boardId는 안나오는데 /board/board/detail?은 나오는 이유 확인 -->
+				<a class="detail-link" href="/board/board/detail?boardId=${vo.boardId}">자세히
 					보기</a>
 			</div>
 			<c:if test="${status.count % 3 == 0 && !status.last}">
 	</div>
-	<div class="hotel-list">
+	<div class="board-list">
 		</c:if>
 		</c:forEach>
 	</div>

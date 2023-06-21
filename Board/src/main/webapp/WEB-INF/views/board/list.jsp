@@ -118,11 +118,12 @@ th {
 					<a>${sessionScope.memberId }님,반갑습니다!</a>
 					<a  href="/board/member/logout">로그아웃</a>
 					<a  href="/board/member/mypage">마이페이지</a>
+					<a  href="/board/hotel/list">여행사</a>
 		</c:if>
 		<c:if test="${empty sessionScope.memberId }">
 					<a href="/board/member/login">로그인</a>
 					<a href="/board/member/register">회원가입</a>
-
+					<a href="/board/hotel/list">여행사</a>
 		</c:if>
 		
   </div>
@@ -204,7 +205,20 @@ th {
 			alert('게시글 수정 성공')
 		} else if(result == 'deleteSuccess') {
 			alert('게시글 삭제 성공')
+		} else if(result == 'loginSuccess') {
+			alert('로그인 성공')
+		} else if(result == 'logoutSuccess') {
+			alert('로그아웃 성공')
+		} else if(result == 'deleteSuccess'){
+			alert('회원탈퇴 완료')
 		}
+		
+		//if(result != null && result != "") 방법 2
+			
+		//<c:if test="${not empty result}"> 방법 3
+		//	alert("${result}");
+		//</c:if>
+		
 	</script>
 	
 </body>

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>호텔 로그인</title>
@@ -21,8 +22,16 @@
 		</form>
 	</div>
 	<div>
-		<a href="/member/find-memberid">아이디 찾기</a>
-		<a href="/member/find-memberpw">비밀번호 찾기</a>
+		<a href="/board/member/find-memberid">아이디 찾기</a>
+		<a href="/board/member/find-memberpw">비밀번호 찾기</a>
 	</div>
+	
+	<input type="hidden" id="alert" value="${result }">
+	<script type="text/javascript">
+		var result = $('#alert').val();
+		if (result == 'loginFail') {
+			alert('아이디 또는 비밀번호가 일치하지 않습니다!')
+		} 
+	</script>
 </body>
 </html>

@@ -65,7 +65,7 @@ public class BoardController {
 			return "/board/register";
 		} else {
 			session.setAttribute("targerURI", "/board/register");
-			return "redirect:/login";
+			return "redirect:/member/login";
 		}
 	} // end registerGET()
 	

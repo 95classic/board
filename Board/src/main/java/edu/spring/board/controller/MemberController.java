@@ -91,18 +91,21 @@ public class MemberController {
 		vo = memberService.login(vo);
 		
 		String targetURI = (String) session.getAttribute("targetURI");
-		logger.info(targetURI);
-		
+		logger.info("targetURI = {}", targetURI);
+		logger.info("vo = {}", vo);
 		if(vo != null) {
+			logger.info("if vo!=null");
 			session.setAttribute("memberId", vo.getMemberId());
+			logger.info("session 생성 확인 {}", session.getAttribute("memberId"));
 			reAttr.addFlashAttribute("result", "loginSuccess");
 			if(targetURI != null) {
 				session.removeAttribute("targetURI");
 				return "redirect:" + targetURI;
 			} else {
-				return "redirect:/";
+				return "redirect:/board/list";
 			}
 		} else {
+			logger.info("if else");
 			reAttr.addFlashAttribute("result","loginFail");
 			return "redirect:/member/login";
 		}
@@ -113,7 +116,7 @@ public class MemberController {
 		logger.info("logoutGET()호출 ");
 		session.removeAttribute("memberId");
 		reAttr.addFlashAttribute("result", "logoutSuccess");
-		return "redirect:/";
+		return "redirect:/board/list";
 	} // end logoutGET()
 	
 	@GetMapping("/update")
@@ -152,7 +155,7 @@ public class MemberController {
 			logger.info(result + "행 삭제");
 			reAttr.addFlashAttribute("result", "deleteSuccess");
 			session.removeAttribute("memberId");
-			return "redirect:/";
+			return "redirect:/board/list";
 		} else {
 			reAttr.addFlashAttribute("result", "deleteFail");
 			return "redirect:/member/delete";

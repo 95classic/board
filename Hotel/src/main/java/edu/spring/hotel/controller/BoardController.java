@@ -21,43 +21,59 @@ import edu.spring.hotel.pageutil.PageMaker;
 import edu.spring.hotel.service.BoardService;
 
 @Controller
-@RequestMapping(value="/board") // /hotel/board
+@RequestMapping(value = "/board") // /hotel/board
 public class BoardController {
-	private static final Logger logger = 
-			LoggerFactory.getLogger(BoardController.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+
 	@Autowired
 	private BoardService boardService;
-	
-	@GetMapping("/list") // board íŒŒì¼ì˜ list.jsp
-	public void list(Model model, Integer page, Integer numsPerPage) {
-		logger.info("list() í˜¸ì¶œ");
-		logger.info("page = " + page + ", numsPerPage = " + numsPerPage);
+
+	@GetMapping("/list") // board ÆÄÀÏÀÇ list.jsp
+	public void list(Model model, String keyword, String searchType, Integer page, Integer numsPerPage) {
+		logger.info("list() È£Ãâ");
 		
-		// í˜ì´ì§• ì²˜ë¦¬
+
+		// ÆäÀÌÂ¡ Ã³¸®
 		PageCriteria criteria = new PageCriteria();
+		
 		if (page != null) {
 			criteria.setPage(page);
 		}
-		
+
 		if (numsPerPage != null) {
 			criteria.setNumsPerPage(numsPerPage);
 		}
 		
-		List<BoardVO> list = boardService.read(criteria);
-		model.addAttribute("list", list);
-		
+		List<BoardVO> list = null;
 		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCriteria(criteria);
-		pageMaker.setTotalCount(boardService.getTotalCounts());
-		pageMaker.setPageData();
-		model.addAttribute("pageMaker", pageMaker);
 		
+
+		if (keyword == null || searchType == null || keyword.equals("") || searchType.equals("")) {
+			list = boardService.read(criteria);
+			pageMaker.setTotalCount(boardService.getTotalCounts());
+		} else if (searchType != null && searchType.equals("memberId")) {
+			logger.info("start : " + criteria.getStart() + ", end : " + criteria.getEnd());
+			list = boardService.readByMemberId(keyword, criteria.getStart(), criteria.getEnd());
+			pageMaker.setTotalCount(boardService.getTotalCountsByMemberId(keyword));
+		} else if (searchType != null && searchType.equals("titleOrContent")) {
+			list = boardService.readByTitleOrContent(keyword, criteria.getStart(), criteria.getEnd());
+			pageMaker.setTotalCount(boardService.getTotalCountsByTitleOrContent(keyword));
+		}
+
+		logger.info("page = " + page + ", numsPerPage = " + numsPerPage);
+		
+		pageMaker.setCriteria(criteria);
+		pageMaker.setPageData();
+		model.addAttribute("list", list);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
+		model.addAttribute("pageMaker", pageMaker);
+
 	} // end list()
-	
-	@GetMapping("/register") // board íŒŒì¼ì˜ register.jsp
+
+	@GetMapping("/register") // board ÆÄÀÏÀÇ register.jsp
 	public String registerGET(HttpSession session) {
-		logger.info("registerGET() í˜¸ì¶œ");
+		logger.info("registerGET() È£Ãâ");
 		String memberId = (String) session.getAttribute("memberId");
 
 		if (memberId != null) {
@@ -67,14 +83,14 @@ public class BoardController {
 			return "redirect:/login";
 		}
 	} // end registerGET()
-	
+
 	@PostMapping("/register")
 	public String registerPOST(BoardVO vo, RedirectAttributes reAttr) {
-		logger.info("registerPOST() í˜¸ì¶œ");
+		logger.info("registerPOST() È£Ãâ");
 		logger.info(vo.toString());
 		int result = boardService.create(vo);
-		logger.info(result + "í–‰ ì‚½ì…");
-		
+		logger.info(result + "Çà »ğÀÔ");
+
 		if (result == 1) {
 			reAttr.addFlashAttribute("result", "registerSuccess");
 			return "redirect:/board/list";
@@ -82,26 +98,26 @@ public class BoardController {
 			return "redirect:/board/register";
 		}
 	} // end registerPOST()
-	
-	@GetMapping("/detail") // board íŒŒì¼ì˜ detail.jsp
+
+	@GetMapping("/detail") // board ÆÄÀÏÀÇ detail.jsp
 	public void detailGET(Model model, Integer boardId, Integer page) {
-		logger.info("detailGET() í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("detailGET() È£Ãâ : boardId = " + boardId);
 		BoardVO vo = boardService.read(boardId);
 		model.addAttribute("vo", vo);
 		model.addAttribute("page", page);
 	} // end detailGET()
-	
-	@GetMapping("/update") // board íŒŒì¼ì˜ update.jsp
+
+	@GetMapping("/update") // board ÆÄÀÏÀÇ update.jsp
 	public void updateGET(Model model, Integer boardId, Integer page) {
-		logger.info("updateGET() í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("updateGET() È£Ãâ : boardId = " + boardId);
 		BoardVO vo = boardService.read(boardId);
 		model.addAttribute("vo", vo);
 		model.addAttribute("page", page);
 	} // end updateGET()
-	
-	@PostMapping("/update") // board íŒŒì¼ì˜ update.jsp
+
+	@PostMapping("/update") // board ÆÄÀÏÀÇ update.jsp
 	public String updatePOST(BoardVO vo, Integer page, RedirectAttributes reAttr) {
-		logger.info("updatePOST() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("updatePOST() È£Ãâ : vo = " + vo.toString());
 		int result = boardService.update(vo);
 		if (result == 1) {
 			reAttr.addFlashAttribute("result", "updateSuccess");
@@ -110,51 +126,18 @@ public class BoardController {
 			return "redirect:/board/update?boardId=" + vo.getBoardId();
 		}
 	} // end updatePOST()
-	
-	@PostMapping("/delete") // board íŒŒì¼ì˜ delete.jsp
+
+	@PostMapping("/delete") // board ÆÄÀÏÀÇ delete.jsp
 	public String deletePOST(Integer boardId, RedirectAttributes reAttr) {
-		logger.info("delete() í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("delete() È£Ãâ : boardId = " + boardId);
 		int result = boardService.delete(boardId);
 		if (result == 1) {
-			// í‚¤-ê°’ ì „ì†¡
+			// Å°-°ª Àü¼Û
 			reAttr.addFlashAttribute("result", "deleteSuccess");
 			return "redirect:/board/list";
 		} else {
 			return "redirect:/board/list";
 		}
 	} // end deletePOST()
-	
-	@GetMapping("search")
-	public String titleOrContentSearch(Model model, String keyword, String searchType,Integer page, Integer numsPerPage) {
-		logger.info("titleOrContentSearch() í˜¸ì¶œ");
-		logger.info("page = " + page + ", numsPerPage = " + numsPerPage);
-		logger.info(searchType);
-		// í˜ì´ì§• ì²˜ë¦¬
-		PageCriteria criteria = new PageCriteria();
-		if (page != null) {
-			criteria.setPage(page);
-		}
-		
-		if (numsPerPage != null) {
-			criteria.setNumsPerPage(numsPerPage);
-		}
-		
-		List<BoardVO> list = null;
-		if (searchType.equals("")) {
-			list = boardService.read(criteria);
-		} else if (searchType.equals("memberId")) {
-			list = boardService.readByMemberId(keyword, criteria.getStart(), criteria.getEnd());
-		} else if (searchType.equals("titleOrContent")){
-			list = boardService.readByTitleOrContent(keyword, criteria.getStart(), criteria.getEnd());
-		}
-		model.addAttribute("list", list);
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCriteria(criteria);
-		pageMaker.setTotalCount(boardService.getTotalCounts());
-		pageMaker.setPageData();
-		model.addAttribute("pageMaker", pageMaker);
-		
-		return "board/list";
-	} // end titleOrContentSearch()
-	
+
 } // end BoardController

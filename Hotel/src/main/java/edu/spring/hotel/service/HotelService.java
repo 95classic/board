@@ -18,9 +18,11 @@ public interface HotelService {
 	
 	List<HotelVO> readOrderByHotelNameAsc(PageCriteria criteria); // 가나다 내림차순 전체검색
 	
-	List<HotelVO> readByHotelName(String keyword, PageCriteria criteria); // 호텔 이름 키워드로 검색
+	List<HotelVO> readByHotelName(String keyword, int start, int end); // 호텔 이름 키워드로 검색
 	
 	int getTotalCounts(); //  전체 호텔 수 받아오기 
+	
+	int getTotalCountsByHotelName(String keyword); // 호텔명 검색에 따른 호텔 수 받아오기
 	
 	List<HotelVO> readByHeart(String memberId); // 내가 찜한 호텔 목록 조회
 

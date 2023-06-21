@@ -131,6 +131,6 @@ public class BoardDAOImple implements BoardDAO{
 	@Override
 	public List<BoardVO> selectByHeart(String memberId) {
 		logger.info("selectByHeart()호출 : memberId =" + memberId);
-		return sqlSession.selectList(NAMESPACE + "select_by_heart", memberId);
+		return sqlSession.selectList(NAMESPACE + ".select_by_heart", memberId);
 	} // end selectByHeart 좋아요 목록 
 }

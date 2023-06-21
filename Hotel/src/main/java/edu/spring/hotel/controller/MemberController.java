@@ -1,18 +1,14 @@
 package edu.spring.hotel.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,26 +19,26 @@ import edu.spring.hotel.service.MemberService;
 
 @Controller
 @ControllerAdvice
-@RequestMapping(value = "member") // url : /hotel/memberë ‡ê²Œ í•´ë†“ìœ¼ë©´ ì „ë¶€ member í•˜ìœ„ë¡œ ë§Œë“¤ì–´ì§
+@RequestMapping(value = "member") // url : /hotel/member·¸°Ô ÇØ³õÀ¸¸é ÀüºÎ member ÇÏÀ§·Î ¸¸µé¾îÁü
 public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 
 	@Autowired
 	private MemberService memberService;
 
-	// íšŒì›ê°€ì… ë©”ì†Œë“œ
+	// È¸¿ø°¡ÀÔ ¸Ş¼Òµå
 	@GetMapping("/register")
 	public void registerGET() {
-		logger.info("registerGET() í˜¸ì¶œ");
+		logger.info("registerGET() È£Ãâ");
 	} // end registerGET()
 
-	// íšŒì›ê°€ì… ë©”ì†Œë“œ
+	// È¸¿ø°¡ÀÔ ¸Ş¼Òµå
 	@PostMapping("/register")
 	public String registerPOST(MemberVO vo, RedirectAttributes reAttr) {
-		logger.info("registerPOST() í˜¸ì¶œ");
+		logger.info("registerPOST() È£Ãâ");
 		logger.info(vo.toString());
 		int result = memberService.create(vo);
-		logger.info(result + "í–‰ ì‚½ì…");
+		logger.info(result + "Çà »ğÀÔ");
 		if (result == 1) {
 			reAttr.addFlashAttribute("result", "registerSuccess");
 			return "redirect:/";
@@ -59,14 +55,14 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/idCheck")
 	public int idcheckPOST(MemberVO vo) {
-		logger.info("idcheckPOST() í˜¸ì¶œ");
+		logger.info("idcheckPOST() È£Ãâ");
 		logger.info(vo.toString());
 
 		int result = memberService.idCheck(vo);
-		logger.info("ì—¬ê¸°ê¹Œì§€ëŠ” ì‹¤í–‰");
+		logger.info("¿©±â±îÁö´Â ½ÇÇà");
 		return result;
 
-	} // end idcheckPOST() ì•„ì´ë”” ì¤‘ë³µí™•ì¸
+	} // end idcheckPOST() ¾ÆÀÌµğ Áßº¹È®ÀÎ
 	
 	@GetMapping("/phoneCheck")
 	public void phoneCheckGET() {
@@ -76,24 +72,24 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/phoneCheck")
 	public int phonecheckPOST(MemberVO vo) {
-		logger.info("phoneCheckPOST()í˜¸ì¶œ");
+		logger.info("phoneCheckPOST()È£Ãâ");
 		logger.info(vo.toString());
 		
 		int result = memberService.phoneCheck(vo);
 		return result;
-	} // end phonecheckPOST()íœ´ëŒ€ë²ˆí˜¸ ì¤‘ë³µí™•ì¸ 
+	} // end phonecheckPOST()ÈŞ´ë¹øÈ£ Áßº¹È®ÀÎ 
 
-	// ë¡œê·¸ì¸ ë©”ì†Œë“œ
+	// ·Î±×ÀÎ ¸Ş¼Òµå
 	@GetMapping("/login")
 	public String loginGET() {
-		logger.info("loginGET() í˜¸ì¶œ");
+		logger.info("loginGET() È£Ãâ");
 		return "member/login";
 	} // end loginGET()
 
-	// ë¡œê·¸ì¸ ë©”ì†Œë“œ
+	// ·Î±×ÀÎ ¸Ş¼Òµå
 	@PostMapping("/login")
 	public String loginPOST(MemberVO vo, RedirectAttributes reAttr, HttpSession session) throws Exception {
-		logger.info("loginPOST() í˜¸ì¶œ");
+		logger.info("loginPOST() È£Ãâ");
 
 		vo = memberService.login(vo);
 
@@ -115,10 +111,10 @@ public class MemberController {
 		}
 	} // end loginPOST()
 
-	// ë¡œê·¸ì•„ì›ƒ ë©”ì†Œë“œ
+	// ·Î±×¾Æ¿ô ¸Ş¼Òµå
 	@GetMapping("/logout")
 	public String logoutGET(HttpSession session, RedirectAttributes reAttr) {
-		logger.info("logoutGET() í˜¸ì¶œ");
+		logger.info("logoutGET() È£Ãâ");
 		session.removeAttribute("memberId");
 		reAttr.addFlashAttribute("result", "logoutSuccess");
 		return "redirect:/";
@@ -126,7 +122,7 @@ public class MemberController {
 
 	@GetMapping("/update")
 	public void updateGET(HttpSession session, Model model) {
-		logger.info("updateGET() í˜¸ì¶œ");
+		logger.info("updateGET() È£Ãâ");
 		String memberId = (String) session.getAttribute("memberId");
 		logger.info(memberId);
 		MemberVO vo = memberService.read(memberId);
@@ -135,10 +131,10 @@ public class MemberController {
 
 	@PostMapping("/update")
 	public String updatePOST(MemberVO vo, RedirectAttributes reAttr) {
-		logger.info("updatePOST() í˜¸ì¶œ");
+		logger.info("updatePOST() È£Ãâ");
 		int result = memberService.update(vo);
 		if (result == 1) {
-			logger.info(result + "í–‰ ìˆ˜ì •");
+			logger.info(result + "Çà ¼öÁ¤");
 			reAttr.addFlashAttribute("result", "updateSuccess");
 			return "redirect:/member/mypage";
 		} else {
@@ -148,15 +144,15 @@ public class MemberController {
 
 	@GetMapping("/delete")
 	public void deleteGET() {
-		logger.info("deleteGET() í˜¸ì¶œ");
+		logger.info("deleteGET() È£Ãâ");
 	} // end deleteGET()
 
 	@PostMapping("/delete")
 	public String deletePOST(MemberVO vo, RedirectAttributes reAttr, HttpSession session) {
-		logger.info("deletePOST() í˜¸ì¶œ");
+		logger.info("deletePOST() È£Ãâ");
 		int result = memberService.delete(vo);
 		if (result == 1) {
-			logger.info(result + "í–‰ ì‚­ì œ");
+			logger.info(result + "Çà »èÁ¦");
 			reAttr.addFlashAttribute("result", "deleteSuccess");
 			session.removeAttribute("memberId");
 			return "redirect:/";
@@ -168,18 +164,18 @@ public class MemberController {
 
 	@GetMapping("/find-memberid")
 	public void findMemberId() {
-		logger.info("findMemberId() í˜¸ì¶œ");
+		logger.info("findMemberId() È£Ãâ");
 	} // end findMemberId()
 
 	@GetMapping("/find-memberpw")
 	public void findMemberPw() {
-		logger.info("findMemberPw() í˜¸ì¶œ");
+		logger.info("findMemberPw() È£Ãâ");
 	} // end findMemberPw()
 
-	// ë§ˆì´í˜ì´ì§€ ë©”ì†Œë“œ
+	// ¸¶ÀÌÆäÀÌÁö ¸Ş¼Òµå
 	@GetMapping("/mypage")
 	public void myPageGET() {
-		logger.info("myPageGET() í˜¸ì¶œ");
+		logger.info("myPageGET() È£Ãâ");
 	} // end myPage()
 
 } // end MemberController

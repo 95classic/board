@@ -19,9 +19,11 @@ public interface HotelDAO {
 	
 	List<HotelVO> selectAllByHotelNameAsc(PageCriteria criteria); // 호텔 가나다 순 전체검색
 	
-	List<HotelVO> selectByHotelName(String keyword, PageCriteria criteria); // 호텔 이름 키워드로 검색
+	List<HotelVO> selectByHotelName(String keyword, int start, int end); // 호텔 이름 키워드로 검색
 
 	int getTotalCounts(); // 전체 호텔 수 불러오기
+	
+	int getTotalCountsByHotelName(String keyword); // 호텔명 검색에 따른 호텔 수 불러오기
 
 	int updateReviewCntAndAvg(int amount, int hotelId); // 호텔 별점 등록, 삭제시 별점 평균 수정
 	

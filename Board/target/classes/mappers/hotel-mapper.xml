@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT B.${hotelId},
 		B.${hotelName}, B.${hotelContent},
 		B.${hotelAddress}, B.${reviewCnt},
-		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
+		B.${hotelImg}, B.${hotelStarAvg}
 		FROM (
 		SELECT ROWNUM
 		RN, A. * FROM (
@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT B.${hotelId},
 		B.${hotelName}, B.${hotelContent},
 		B.${hotelAddress}, B.${reviewCnt},
-		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
+		B.${hotelImg}, B.${hotelStarAvg}
 		FROM (
 		SELECT ROWNUM
 		RN, A. * FROM (
@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT B.${hotelId},
 		B.${hotelName}, B.${hotelContent},
 		B.${hotelAddress}, B.${reviewCnt},
-		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
+		B.${hotelImg}, B.${hotelStarAvg}
 		FROM (
 		SELECT ROWNUM
 		RN, A. * FROM (
@@ -68,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT B.${hotelId},
 		B.${hotelName}, B.${hotelContent},
 		B.${hotelAddress}, B.${reviewCnt},
-		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
+		B.${hotelImg}, B.${hotelStarAvg}
 		FROM (
 		SELECT ROWNUM
 		RN, A. * FROM (
@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT B.${hotelId},
 		B.${hotelName}, B.${hotelContent},
 		B.${hotelAddress}, B.${reviewCnt},
-		B.${hotelImg}, B.${hotelStarAvg}, B.${heartCnt}
+		B.${hotelImg}, B.${hotelStarAvg}
 		FROM (
 		SELECT ROWNUM
 		RN, A. * FROM (
