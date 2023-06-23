@@ -1,11 +1,11 @@
 package edu.spring.hotel.pageutil;
 
-// ë¸Œë¼ìš°ì €ì—ì„œ ë³´ì—¬ì§ˆ í˜ì´ì§€ ë²ˆí˜¸ì™€
-// í•œ í˜ì´ì§€ì—ì„œ ë³´ì—¬ì§ˆ ê²Œì‹œê¸€ì˜ ê°œìˆ˜ë¥¼ ì €ì¥í•˜ëŠ” í´ë˜ìŠ¤
-// -> paging ì²˜ë¦¬ì— í•„ìš”í•œ startì™€ end ë²ˆí˜¸ë¥¼ ì•Œ ìˆ˜ ìˆìŒ
+// ºê¶ó¿ìÀú¿¡¼­ º¸¿©Áú ÆäÀÌÁö ¹øÈ£¿Í
+// ÇÑ ÆäÀÌÁö¿¡¼­ º¸¿©Áú °Ô½Ã±ÛÀÇ °³¼ö¸¦ ÀúÀåÇÏ´Â Å¬·¡½º
+// -> paging Ã³¸®¿¡ ÇÊ¿äÇÑ start¿Í end ¹øÈ£¸¦ ¾Ë ¼ö ÀÖÀ½
 public class PageCriteria {
-	private int page; // í˜„ì¬ í˜ì´ì§€ ë²ˆí˜¸
-	private int numsPerPage; // í•œ í˜ì´ì§€ì˜ ê²Œì‹œê¸€ ê°œìˆ˜
+	private int page; // ÇöÀç ÆäÀÌÁö ¹øÈ£
+	private int numsPerPage; // ÇÑ ÆäÀÌÁöÀÇ °Ô½Ã±Û °³¼ö
 	
 	public PageCriteria() {
 		this.page = 1;
@@ -34,14 +34,19 @@ public class PageCriteria {
 		this.numsPerPage = numsPerPage;
 	}
 	
-	// í˜„ì¬ ë³´ì—¬ì§€ëŠ” í˜ì´ì§€ì˜ ì‹œì‘ ê¸€ ì¼ë ¨ë²ˆí˜¸(rn)
+	// ÇöÀç º¸¿©Áö´Â ÆäÀÌÁöÀÇ ½ÃÀÛ ±Û ÀÏ·Ã¹øÈ£(rn)
 	public int getStart() {
 		return (this.page - 1) * this.numsPerPage + 1;
 	}
 	
-	// í˜„ì¬ ë³´ì—¬ì§€ëŠ” í˜ì´ì§€ì˜ ë§ˆì§€ë§‰ ê¸€ ì¼ë ¨ë²ˆí˜¸(rn)
+	// ÇöÀç º¸¿©Áö´Â ÆäÀÌÁöÀÇ ¸¶Áö¸· ±Û ÀÏ·Ã¹øÈ£(rn)
 	public int getEnd() {
 		return this.page * this.numsPerPage;
+	}
+
+	@Override
+	public String toString() {
+		return "PageCriteria [getStart()=" + getStart() + ", getEnd()=" + getEnd() + "]";
 	}
 	
 	

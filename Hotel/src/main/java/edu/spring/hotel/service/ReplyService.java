@@ -8,12 +8,12 @@ import edu.spring.hotel.domain.ReplyVO;
 //CRUD(Create, Read, Update, Delete)
 
 public interface ReplyService {
-	// ëŒ“ê¸€ ì‘ì„±
+	// ´ñ±Û ÀÛ¼º
 	int create(ReplyVO vo);
-	// ëŒ“ê¸€ ì½ê¸°
+	// ´ñ±Û ÀĞ±â
 	List<ReplyVO> read(int boardId);
-	// ëŒ“ê¸€ ìˆ˜ì •
+	// ´ñ±Û ¼öÁ¤
 	int update(ReplyVO vo);
-	// ëŒ“ê¸€ ì‚­ì œ
+	// ´ñ±Û »èÁ¦
 	int delete(int replyId, int boardId) throws Exception;
 }

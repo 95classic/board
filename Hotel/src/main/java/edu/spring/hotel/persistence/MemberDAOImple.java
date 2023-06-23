@@ -24,64 +24,64 @@ public class MemberDAOImple implements MemberDAO{
 	
 	@Override
 	public int insert(MemberVO vo) {
-		logger.info("insert() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("insert() È£Ãâ : vo = " + vo.toString());
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
-	} // end insert ë“±ë¡
+	} // end insert µî·Ï
 
 	@Override
 	public MemberVO select(String memberId) {
-		logger.info("select()í˜¸ì¶œ : memberId = " + memberId);
+		logger.info("select()È£Ãâ : memberId = " + memberId);
 		return sqlSession.selectOne(NAMESPACE + ".select_by_member_id", memberId);
-	} // end select ìƒì„¸ê²€ìƒ‰
+	} // end select »ó¼¼°Ë»ö
 
 	@Override
 	public int update(MemberVO vo) {
-		logger.info("update() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("update() È£Ãâ : vo = " + vo.toString());
 		return sqlSession.update(NAMESPACE + ".update", vo);
-	} // end update ìˆ˜ì •
+	} // end update ¼öÁ¤
 
 	@Override
 	public int delete(MemberVO vo) {
-		logger.info("delete() í˜¸ì¶œ");
+		logger.info("delete() È£Ãâ");
 		logger.info("memberId = " + vo.getMemberId());
 		logger.info("memberPw = " + vo.getMemberPw());
 		return sqlSession.delete(NAMESPACE + ".delete", vo);
-	} // end delete ì‚­ì œ
+	} // end delete »èÁ¦
 
 	@Override
 	public int idCheck(MemberVO vo) {
-		logger.info("idcheck()í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("idcheck()È£Ãâ : vo = " + vo.toString());
 		return sqlSession.selectOne(NAMESPACE + ".idCheck", vo);
-	} // end idcheck ì•„ì´ë”” ì¤‘ë³µì²´í¬
+	} // end idcheck ¾ÆÀÌµğ Áßº¹Ã¼Å©
 
 	@Override
 	public MemberVO login(MemberVO vo) {
-		logger.info("login() í˜¸ì¶œ");
+		logger.info("login() È£Ãâ");
 		logger.info("vo = " + vo.toString());
 		return sqlSession.selectOne(NAMESPACE + ".login", vo);
-	} // ë¡œê·¸ì¸
+	} // ·Î±×ÀÎ
 
 	@Override
 	public String findMemberId(MemberVO vo) {
-		logger.info("findMemberId() í˜¸ì¶œ vo = " + vo.toString());
+		logger.info("findMemberId() È£Ãâ vo = " + vo.toString());
 		return sqlSession.selectOne(NAMESPACE + ".find_member_id", vo);
-	} // ì•„ì´ë”” ì°¾ê¸°
+	} // ¾ÆÀÌµğ Ã£±â
 
 	@Override
 	public String findMemberPw(MemberVO vo) {
-		logger.info("findMemberPw() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("findMemberPw() È£Ãâ : vo = " + vo.toString());
 		return sqlSession.selectOne(NAMESPACE + ".find_member_pw", vo);
-	} // ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
+	} // ºñ¹Ğ¹øÈ£ Ã£±â
 	
 	@Override
 	public int phoneCheck(MemberVO vo) {
-		logger.info("phonecheck()í˜¸ì¶œ : vo = " +  vo.toString());
+		logger.info("phonecheck()È£Ãâ : vo = " +  vo.toString());
 		return sqlSession.selectOne(NAMESPACE + ".phoneCheck", vo);
-	} // end phone íœ´ëŒ€í° ë²ˆí˜¸ ì¤‘ë³µì²´í¬
+	} // end phone ÈŞ´ëÆù ¹øÈ£ Áßº¹Ã¼Å©
 
 	@Override
 	public Date selectMemberDateCreated(String memberId) {
-		logger.info("selectMemberDateCreated() í˜¸ì¶œ : memberId = " + memberId);
+		logger.info("selectMemberDateCreated() È£Ãâ : memberId = " + memberId);
 		return sqlSession.selectOne(NAMESPACE + ".select_member_date_created", memberId);
 	}
 

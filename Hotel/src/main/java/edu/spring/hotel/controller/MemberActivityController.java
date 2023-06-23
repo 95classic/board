@@ -24,7 +24,7 @@ public class MemberActivityController {
 	
 	@GetMapping("/myActivity")
 	public void myActivityGET(Model model, HttpSession session) {
-		logger.info("myActivityGET() í˜¸ì¶œ");
+		logger.info("myActivityGET() È£Ãâ");
 		String memberId = (String) session.getAttribute("memberId");
 		MemberActivity activity = activityService.read(memberId);
 		model.addAttribute("activity", activity);

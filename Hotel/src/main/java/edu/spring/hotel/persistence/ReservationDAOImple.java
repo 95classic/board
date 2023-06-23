@@ -24,19 +24,19 @@ public class ReservationDAOImple implements ReservationDAO {
 
 	@Override
 	public int insert(ReservationVO vo) {
-		logger.info("insert() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("insert() È£Ãâ : vo = " + vo.toString());
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	@Override
 	public List<ReservationVO> select(String memberId) {
-		logger.info("select() í˜¸ì¶œ : memberId = " + memberId);
+		logger.info("select() È£Ãâ : memberId = " + memberId);
 		return sqlSession.selectList(NAMESPACE + ".select_by_memberId", memberId);
 	}
 
 	@Override
 	public int delete(int reservationId, int roomId) {
-		logger.info("delete() í˜¸ì¶œ : reservationId = " + reservationId);
+		logger.info("delete() È£Ãâ : reservationId = " + reservationId);
 		Map<String, Object> args = new HashMap<>();
 		args.put("reservationId", reservationId);
 		args.put("roomId", roomId);

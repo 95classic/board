@@ -19,37 +19,37 @@ public class MemberServiceImple implements MemberService{
 
 	@Override
 	public int create(MemberVO vo) {
-		logger.info("create() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("create() È£Ãâ : vo = " + vo.toString());
 		return dao.insert(vo);
 	} // end create
 
 	@Override
 	public MemberVO read(String memberId) {
-		logger.info("read() í˜¸ì¶œ : memberId = " + memberId);
+		logger.info("read() È£Ãâ : memberId = " + memberId);
 		return dao.select(memberId);
 	} // end read
 
 	@Override
 	public int update(MemberVO vo) {
-		logger.info("update() í˜¸ì¶œ : vo = " + vo.toString() );
+		logger.info("update() È£Ãâ : vo = " + vo.toString() );
 		return dao.update(vo);
 	} // end update
 
 	@Override
 	public int delete(MemberVO vo) {
-		logger.info("delete()í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("delete()È£Ãâ : vo = " + vo.toString());
 		return dao.delete(vo); 
 	} // end delete
 
 	@Override
-	public int idCheck(MemberVO vo) {
-		logger.info("idcheck()í˜¸ì¶œ : vo = " + vo.toString());
+	public int idCheck(MemberVO vo){
+		logger.info("idcheck()È£Ãâ : vo = " + vo.toString());
 		return dao.idCheck(vo);
 	} // end idcheck
 
 	@Override
 	public MemberVO login(MemberVO vo) throws Exception {
-		logger.info("login() í˜¸ì¶œ");
+		logger.info("login() È£Ãâ");
 		logger.info("memberId = " + vo.getMemberId());
 		logger.info("memberPw = " + vo.getMemberPw());
 		return dao.login(vo);
@@ -57,19 +57,19 @@ public class MemberServiceImple implements MemberService{
 
 	@Override
 	public String findMemberId(MemberVO vo) {
-		logger.info("findMemberId() í˜¸ì¶œ : memberId = " + vo.getMemberId());
+		logger.info("findMemberId() È£Ãâ : memberId = " + vo.getMemberId());
 		return dao.findMemberId(vo);
 	}
 
 	@Override
 	public String findMemberPw(MemberVO vo) {
-		logger.info("findMemberPw() í˜¸ì¶œ : memberPw = " + vo.getMemberPw());
+		logger.info("findMemberPw() È£Ãâ : memberPw = " + vo.getMemberPw());
 		return dao.findMemberPw(vo);
 	}
 	
 	@Override
-	public int phoneCheck(MemberVO vo) {
-		logger.info("phoneCheck()í˜¸ì¶œ : vo = " + vo.toString());
+	public int phoneCheck(MemberVO vo){
+		logger.info("phoneCheck()È£Ãâ : vo = " + vo.toString());
 		return dao.phoneCheck(vo);
 	}
 	

@@ -21,11 +21,11 @@ import edu.spring.hotel.service.ReplyService;
 
 
 
-// * RESTful urlê³¼ ì˜ë¯¸
-// /replies (POST) : ëŒ“ê¸€ ì¶”ê°€(insert)
-// /replies/all/ìˆ«ì (GET) : í•´ë‹¹ ê¸€ ë²ˆí˜¸(boardId)ì˜ ëª¨ë“  ëŒ“ê¸€ ê²€ìƒ‰(select)
-// /replies/ìˆ«ì (PUT) : í•´ë‹¹ ëŒ“ê¸€ ë²ˆí˜¸(replyId)ì˜ ë‚´ìš©ì„ ìˆ˜ì •(update)
-// /replies/ìˆ«ì (DELETE) : í•´ë‹¹ ëŒ“ê¸€ ë²ˆí˜¸(replyId)ì˜ ëŒ“ê¸€ì„ ì‚­ì œ(delete)
+// * RESTful url°ú ÀÇ¹Ì
+// /replies (POST) : ´ñ±Û Ãß°¡(insert)
+// /replies/all/¼ıÀÚ (GET) : ÇØ´ç ±Û ¹øÈ£(boardId)ÀÇ ¸ğµç ´ñ±Û °Ë»ö(select)
+// /replies/¼ıÀÚ (PUT) : ÇØ´ç ´ñ±Û ¹øÈ£(replyId)ÀÇ ³»¿ëÀ» ¼öÁ¤(update)
+// /replies/¼ıÀÚ (DELETE) : ÇØ´ç ´ñ±Û ¹øÈ£(replyId)ÀÇ ´ñ±ÛÀ» »èÁ¦(delete)
 
 @RestController
 @RequestMapping(value="board/replies")
@@ -36,16 +36,16 @@ public class ReplyRESTController {
 	@Autowired
 	private ReplyService replyService;
 	
-	@PostMapping // POST : ëŒ“ê¸€ ì…ë ¥
+	@PostMapping // POST : ´ñ±Û ÀÔ·Â
 	public ResponseEntity<Integer> createReply(@RequestBody ReplyVO vo) {
 		// @RequestBody
-		// - í´ë¼ì´ì–¸íŠ¸ì—ì„œ ì „ì†¡ë°›ì€ json ë°ì´í„°ë¥¼
-		//	 ìë°” ê°ì²´ë¡œ ë³€í™˜í•´ì£¼ëŠ” annotation
-		logger.info("createReply() í˜¸ì¶œ : vo = " + vo.toString());
+		// - Å¬¶óÀÌ¾ğÆ®¿¡¼­ Àü¼Û¹ŞÀº json µ¥ÀÌÅÍ¸¦
+		//	 ÀÚ¹Ù °´Ã¼·Î º¯È¯ÇØÁÖ´Â annotation
+		logger.info("createReply() È£Ãâ : vo = " + vo.toString());
 		
-		// ResponseEntity<T> : Rest ë°©ì‹ì—ì„œ ë°ì´í„°ë¥¼ ë¦¬í„´í•  ë•Œ ì“°ì´ëŠ” ê°ì²´
-		// - ë°ì´í„° HttpStatusë¥¼ ì „ì†¡
-		// - <T> : ë³´ë‚´ê³ ì í•˜ëŠ” ë°ì´í„° íƒ€ì…
+		// ResponseEntity<T> : Rest ¹æ½Ä¿¡¼­ µ¥ÀÌÅÍ¸¦ ¸®ÅÏÇÒ ¶§ ¾²ÀÌ´Â °´Ã¼
+		// - µ¥ÀÌÅÍ HttpStatus¸¦ Àü¼Û
+		// - <T> : º¸³»°íÀÚ ÇÏ´Â µ¥ÀÌÅÍ Å¸ÀÔ
 		int result = 0;
 		try {
 			result = replyService.create(vo);
@@ -55,16 +55,16 @@ public class ReplyRESTController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	} // end createReply()
 	
-	@GetMapping("/all/{boardId}") // GET : ëŒ“ê¸€ ì„ íƒ(all)
+	@GetMapping("/all/{boardId}") // GET : ´ñ±Û ¼±ÅÃ(all)
 	public ResponseEntity<List<ReplyVO>> readReplies(
 			@PathVariable("boardId") int boardId) {
-			// @PathVariable("boardId") : /all/{boardId} ê°’ì„ ì„¤ì •ëœ ë³€ìˆ˜ì— ì €ì¥
-		logger.info("readReplies() í˜¸ì¶œ : boardId = " + boardId);
+			// @PathVariable("boardId") : /all/{boardId} °ªÀ» ¼³Á¤µÈ º¯¼ö¿¡ ÀúÀå
+		logger.info("readReplies() È£Ãâ : boardId = " + boardId);
 		List<ReplyVO> list = replyService.read(boardId);
 		return new ResponseEntity<List<ReplyVO>>(list, HttpStatus.OK);
 	} // end readReplies()
 	
-	@PutMapping("/{replyId}") // PUT : ëŒ“ê¸€ ìˆ˜ì •
+	@PutMapping("/{replyId}") // PUT : ´ñ±Û ¼öÁ¤
 	public ResponseEntity<Integer> updateReply(
 			@PathVariable("replyId") int replyId,
 			@RequestBody ReplyVO vo

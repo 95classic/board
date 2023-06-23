@@ -5,15 +5,15 @@ import java.util.List;
 import edu.spring.hotel.domain.ReviewVO;
 
 public interface ReviewDAO {
-	// ë¦¬ë·° ë“±ë¡
+	// ¸®ºä µî·Ï
 	int insert(ReviewVO vo);
-	// ë¦¬ë·° ì „ì²´ê²€ìƒ‰
+	// ¸®ºä ÀüÃ¼°Ë»ö
 	List<ReviewVO> select(int hotelId);
-	// ë¦¬ë·° ìˆ˜ì •
+	// ¸®ºä ¼öÁ¤
 	int update(ReviewVO vo);
-	// ë¦¬ë·° ì‚­ì œ
+	// ¸®ºä »èÁ¦
 	int delete(int reviewId);
-	// ë‚´ê°€ ì‘ì„±í•œ ë¦¬ë·° ìˆ˜ ê²€ìƒ‰
+	// ³»°¡ ÀÛ¼ºÇÑ ¸®ºä ¼ö °Ë»ö
 	int selectReviewCnt(String memberId);
 	
 } // end ReviewDAO

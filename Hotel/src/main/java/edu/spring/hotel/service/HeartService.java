@@ -4,13 +4,13 @@ import edu.spring.hotel.domain.HeartVO;
 
 public interface HeartService {
 	
-	// ì¢‹ì•„ìš” ìƒíƒœ ì½ê¸°
+	// ÁÁ¾Æ¿ä »óÅÂ ÀĞ±â
 	int read(int hotelId, String memberId);
 	
-	// ì¢‹ì•„ìš” ë“±ë¡
+	// ÁÁ¾Æ¿ä µî·Ï
 	int create(HeartVO vo);
 	
-	// ì¢‹ì•„ìš” ì·¨ì†Œ
+	// ÁÁ¾Æ¿ä Ãë¼Ò
 	int delete(int hotelId, String memberId);
 	
 	

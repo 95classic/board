@@ -26,7 +26,7 @@ public class WantedController {
 	
 	@GetMapping("/myWanted")
 	public void myWantedGET(Model model, HttpSession session) {
-		logger.info("myWantedGET() í˜¸ì¶œ");
+		logger.info("myWantedGET() È£Ãâ");
 		String memberId = (String) session.getAttribute("memberId");
 		List<HotelVO> list = hotelService.readByHeart(memberId);
 		model.addAttribute("list", list);	

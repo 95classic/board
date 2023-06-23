@@ -20,8 +20,8 @@ import edu.spring.hotel.domain.ReviewVO;
 import edu.spring.hotel.service.HotelService;
 import edu.spring.hotel.service.ReviewService;
 
-// /replies/ìˆ«ì (PUT) : í•´ë‹¹ ë¦¬ë·° ë²ˆí˜¸(reviewId)ì˜ ë‚´ìš©ì„ ìˆ˜ì •(update)
-// /replies/ìˆ«ì (DELETE) : í•´ë‹¹ ë¦¬ë·° ë²ˆí˜¸(reviewId)ì˜ ë¦¬ë·°ë¥¼ ì‚­ì œ(delete)
+// /replies/¼ıÀÚ (PUT) : ÇØ´ç ¸®ºä ¹øÈ£(reviewId)ÀÇ ³»¿ëÀ» ¼öÁ¤(update)
+// /replies/¼ıÀÚ (DELETE) : ÇØ´ç ¸®ºä ¹øÈ£(reviewId)ÀÇ ¸®ºä¸¦ »èÁ¦(delete)
 
 @RestController
 @RequestMapping(value="reviews")
@@ -33,16 +33,16 @@ public class ReviewRESTController {
 	private ReviewService reviewService;
 	
 
-	@PostMapping // POST : ë¦¬ë·° ì…ë ¥
+	@PostMapping // POST : ¸®ºä ÀÔ·Â
 	public ResponseEntity<Integer> createReview(@RequestBody ReviewVO vo) {
 		// @RequestBody
-		// - í´ë¼ì´ì–¸íŠ¸ì—ì„œ ì „ì†¡ë°›ì€ json ë°ì´í„°ë¥¼
-		//	 ìë°” ê°ì²´ë¡œ ë³€í™˜í•´ì£¼ëŠ” annotation
-		logger.info("createReview() í˜¸ì¶œ : vo = " + vo.toString());
+		// - Å¬¶óÀÌ¾ğÆ®¿¡¼­ Àü¼Û¹ŞÀº json µ¥ÀÌÅÍ¸¦
+		//	 ÀÚ¹Ù °´Ã¼·Î º¯È¯ÇØÁÖ´Â annotation
+		logger.info("createReview() È£Ãâ : vo = " + vo.toString());
 		
-		// ResponseEntity<T> : Rest ë°©ì‹ì—ì„œ ë°ì´í„°ë¥¼ ë¦¬í„´í•  ë•Œ ì“°ì´ëŠ” ê°ì²´
-		// - ë°ì´í„° HttpStatusë¥¼ ì „ì†¡
-		// - <T> : ë³´ë‚´ê³ ì í•˜ëŠ” ë°ì´í„° íƒ€ì…
+		// ResponseEntity<T> : Rest ¹æ½Ä¿¡¼­ µ¥ÀÌÅÍ¸¦ ¸®ÅÏÇÒ ¶§ ¾²ÀÌ´Â °´Ã¼
+		// - µ¥ÀÌÅÍ HttpStatus¸¦ Àü¼Û
+		// - <T> : º¸³»°íÀÚ ÇÏ´Â µ¥ÀÌÅÍ Å¸ÀÔ
 		int result = 0;
 		try {
 			result = reviewService.create(vo);
@@ -52,16 +52,16 @@ public class ReviewRESTController {
 		return new ResponseEntity<Integer>(result, HttpStatus.OK);
 	} // end createReview()
 	
-	@GetMapping("/all/{hotelId}") // GET : ë¦¬ë·° ì„ íƒ(all)
+	@GetMapping("/all/{hotelId}") // GET : ¸®ºä ¼±ÅÃ(all)
 	public ResponseEntity<List<ReviewVO>> readReviews(
 			@PathVariable("hotelId") int hotelId) {
-			// @PathVariable("hotelId") : /all/{hotelId} ê°’ì„ ì„¤ì •ëœ ë³€ìˆ˜ì— ì €ì¥
-		logger.info("readReviews() í˜¸ì¶œ : hotelId = " + hotelId);
+			// @PathVariable("hotelId") : /all/{hotelId} °ªÀ» ¼³Á¤µÈ º¯¼ö¿¡ ÀúÀå
+		logger.info("readReviews() È£Ãâ : hotelId = " + hotelId);
 		List<ReviewVO> list = reviewService.read(hotelId);
 		return new ResponseEntity<List<ReviewVO>>(list, HttpStatus.OK);
 	} // end readReviews()
 	
-	@PutMapping("/{reviewId}") // PUT : ë¦¬ë·° ìˆ˜ì •
+	@PutMapping("/{reviewId}") // PUT : ¸®ºä ¼öÁ¤
 	public ResponseEntity<Integer> updateReview(
 			@PathVariable("reviewId") int reviewId,
 			@RequestBody ReviewVO vo

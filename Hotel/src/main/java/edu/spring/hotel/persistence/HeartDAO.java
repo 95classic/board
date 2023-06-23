@@ -4,12 +4,12 @@ import edu.spring.hotel.domain.HeartVO;
 
 public interface HeartDAO {
 
-	int select(int hotelId, String memberId); // ì¢‹ì•„ìš” ìƒíƒœ íŒë³„ ê²€ìƒ‰
+	int select(int hotelId, String memberId); // ÁÁ¾Æ¿ä »óÅÂ ÆÇº° °Ë»ö
 	
-	int insert(HeartVO vo); // ì¢‹ì•„ìš” ë“±ë¡
+	int insert(HeartVO vo); // ÁÁ¾Æ¿ä µî·Ï
 	
-	int delete(int hotelId, String memberId); // ì¢‹ì•„ìš” ì‚­ì œ
+	int delete(int hotelId, String memberId); // ÁÁ¾Æ¿ä »èÁ¦
 	
-	int selectHeartCnt(String memberId); // ë‚´ê°€ ì¢‹ì•„ìš” í•œ ê°œìˆ˜ ê²€ìƒ‰
+	int selectHeartCnt(String memberId); // ³»°¡ ÁÁ¾Æ¿ä ÇÑ °³¼ö °Ë»ö
 	
 }

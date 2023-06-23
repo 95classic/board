@@ -38,7 +38,7 @@
 	}
 
 	50% {
-		transform: scale(1.2);
+		transform: scale(1.5);
 	}
 
 	100% {
@@ -297,7 +297,7 @@ label {
 }
 @keyframes rotating {
   0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  100% { transform: rotate(2000deg); }
 }
 
 .reviewStar {
@@ -329,14 +329,16 @@ label {
 		src="<spring:url value="/resources/hotelImg/main.png"/>"></a>
 	<a href="./?page=${page}"><button id="listBtn">호텔목록</button></a>
 	<img style="width: 500px; height: auto;" src="<spring:url value='${hvo.hotelImg }'/>"><br>
+	
 	<span id="heartBtn">
   		<i id="heartIcon" class="far fa-heart"></i>
 	</span>
+	
 	<input type="hidden" id="hotelId" value="${hvo.hotelId }">
 	<h2>호텔명 : ${hvo.hotelName}</h2>
 	<h3>별점 평균 (${hvo.hotelReviewAvg } / 5)</h3>
 	<br>
-	<p style="font-size : 20px;">호텔 주소 : ${hvo.hotelAddress }</p>
+	<p style="font-size : 20px;">위치 : ${hvo.hotelAddress }</p>
 	
 	<div id="map" 
 	style="width: 700px; height: 600px; margin: 0 auto;
@@ -403,9 +405,9 @@ label {
 	</div>
 
 	<c:if test="${not empty sessionScope.memberId }">
-		<h2>예약하기(객실을 먼저 선택해주세요!)</h2>
+		<!-- <h2>예약하기(객실을 먼저 선택해주세요!)</h2> -->
 		<form id="reservation-form" action="member/createReservation"
-			method="POST">
+			method="POST" style="display: none;">
 			<input type="hidden" name="hotelId" value="${hvo.hotelId }">
 			<input type="hidden" name="memberId"
 				value="${sessionScope.memberId }"> <input type="hidden"
@@ -645,6 +647,7 @@ label {
          $('.selectRoom').click(function(){
         	 	var roomId = $(this).prev('.roomId').val();
         	    getRoomById(roomId);
+        	    $('#reservation-form').css('display', 'block');
         	}); // end selectRoom.click() 
 
         	function getRoomById(roomId) {
@@ -697,14 +700,12 @@ label {
         	    	$('input[name=totalPrice]').val(totalPrice);
         	    }
         	  });
-
         	}); 
          
          // 하트 버튼 클릭 했을 때
-         $('#heartIcon').click(function() {
+         $('#heartBtn').click(function() {
         	 var memberId = $('#memberId').val();
         	 // 로그인 상태 여부 판단 후 좋아요 기능 작동
-        	 // far 하트 비어있음 fas 하트 채워있음
         	 if (memberId != null) {
         		 if ($('#heartIcon').hasClass('far')) { 
              	    var hotelId = $('#hotelId').val();

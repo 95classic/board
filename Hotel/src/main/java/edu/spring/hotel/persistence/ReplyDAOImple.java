@@ -22,31 +22,31 @@ public class ReplyDAOImple implements ReplyDAO {
 	
 	@Override
 	public int insert(ReplyVO vo) {
-		logger.info("insert() í˜¸ì¶œ : vo = " + vo);
+		logger.info("insert() È£Ãâ : vo = " + vo);
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	@Override
 	public List<ReplyVO> selectAll(int boardId) {
-		logger.info("selectAll() í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("selectAll() È£Ãâ : boardId = " + boardId);
 		return sqlSession.selectList(NAMESPACE + ".select_all", boardId);
 	}
 
 	@Override
 	public int update(ReplyVO vo) {
-		logger.info("update() í˜¸ì¶œ");
+		logger.info("update() È£Ãâ");
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
 	@Override
 	public int delete(int replyId) {
-		logger.info("delete() í˜¸ì¶œ");
+		logger.info("delete() È£Ãâ");
 		return sqlSession.delete(NAMESPACE + ".delete", replyId);
 	}
 
 	@Override
 	public int selectReplyCnt(String memberId) {
-		logger.info("selectReplyCnt() í˜¸ì¶œ : memberId = " + memberId);
+		logger.info("selectReplyCnt() È£Ãâ : memberId = " + memberId);
 		return sqlSession.selectOne(NAMESPACE + ".select_reply_cnt", memberId);
 	}
 

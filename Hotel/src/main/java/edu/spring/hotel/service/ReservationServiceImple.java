@@ -26,26 +26,26 @@ public class ReservationServiceImple implements ReservationService {
 	@Transactional(value="transactionManager")
 	@Override
 	public int create(ReservationVO vo) {
-		logger.info("create() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("create() È£Ãâ : vo = " + vo.toString());
 		reservationDAO.insert(vo);		
 		roomDAO.updateRoomCnt(-1, vo.getRoomId());
-		logger.info("ì”ì—¬ ê°ì‹¤ ìˆ˜ ìˆ˜ì •ì™„ë£Œ");
+		logger.info("ÀÜ¿© °´½Ç ¼ö ¼öÁ¤¿Ï·á");
 		return 1;
 	}
 
 	@Override
 	public List<ReservationVO> read(String memberId) {
-		logger.info("read() í˜¸ì¶œ");
+		logger.info("read() È£Ãâ");
 		return reservationDAO.select(memberId);
 	}
 
 	@Transactional(value="transactionManager")
 	@Override
 	public int delete(int reservationId, int roomId) {
-		logger.info("delete() í˜¸ì¶œ : reservationId = " + reservationId);
+		logger.info("delete() È£Ãâ : reservationId = " + reservationId);
 		reservationDAO.delete(reservationId, roomId);
 		roomDAO.updateRoomCnt(1, roomId);
-		logger.info("ì”ì—¬ ê°ì‹¤ ìˆ˜ ìˆ˜ì • ì™„ë£Œ");
+		logger.info("ÀÜ¿© °´½Ç ¼ö ¼öÁ¤ ¿Ï·á");
 		return 1;
 	}
 	

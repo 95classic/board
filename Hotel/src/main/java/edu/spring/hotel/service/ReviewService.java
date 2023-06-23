@@ -5,13 +5,13 @@ import java.util.List;
 import edu.spring.hotel.domain.ReviewVO;
 
 public interface ReviewService {
-	// ë¦¬ë·° ì‘ì„±
+	// ¸®ºä ÀÛ¼º
 	int create(ReviewVO vo);
-	// ë¦¬ë·° ì½ê¸°
+	// ¸®ºä ÀĞ±â
 	List<ReviewVO> read(int hotelId);
-	// ë¦¬ë·° ìˆ˜ì •
+	// ¸®ºä ¼öÁ¤
 	int update(ReviewVO vo);
-	// ë¦¬ë·° ì‚­ì œ
+	// ¸®ºä »èÁ¦
 	int delete(int reviewId, int hotelId) throws Exception;
 	
 } // end ReviewService

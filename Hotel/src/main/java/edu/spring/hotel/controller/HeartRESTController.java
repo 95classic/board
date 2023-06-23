@@ -30,7 +30,7 @@ public class HeartRESTController {
 
 	@GetMapping("/all/{hotelId}")
 	public ResponseEntity<Integer> selectHeart(@PathVariable("hotelId") int hotelId, @RequestParam String memberId) {
-		logger.info("selectHeart() í˜¸ì¶œ");
+		logger.info("selectHeart() È£Ãâ");
 		logger.info("hotelId = " + hotelId);
 		logger.info("memberId = " + memberId);
 		int result = 0;
@@ -45,7 +45,7 @@ public class HeartRESTController {
 
 	@PostMapping
 	public ResponseEntity<Integer> createHeart(@RequestBody HeartVO vo) {
-		logger.info("createHeart() í˜¸ì¶œ");
+		logger.info("createHeart() È£Ãâ");
 
 		int result = 0;
 		try {
@@ -59,7 +59,7 @@ public class HeartRESTController {
 
 	@DeleteMapping("/{hotelId}")
 	public ResponseEntity<Integer> deleteHeart(@PathVariable("hotelId") int hotelId, @RequestBody String memberId) {
-		logger.info("deleteHeart() í˜¸ì¶œ");
+		logger.info("deleteHeart() È£Ãâ");
 		int result = 0;
 		try {
 			result = heartService.delete(hotelId, memberId);

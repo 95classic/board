@@ -10,9 +10,9 @@ public interface MemberService {
 	int update(MemberVO vo);
 	int delete(MemberVO vo);
 	MemberVO login(MemberVO vo) throws Exception;
-	int idCheck(MemberVO vo); // ì•„ì´ë”” ì¤‘ë³µì²´í¬
-	String findMemberId(MemberVO vo); // ì•„ì´ë”” ì°¾ê¸°
-	String findMemberPw(MemberVO vo); // ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
-	int phoneCheck(MemberVO vo); // íœ´ëŒ€ë²ˆí˜¸ ì¤‘ë³µì²´í¬
+	int idCheck(MemberVO vo); // ¾ÆÀÌµğ Áßº¹Ã¼Å©
+	String findMemberId(MemberVO vo); // ¾ÆÀÌµğ Ã£±â
+	String findMemberPw(MemberVO vo); // ºñ¹Ğ¹øÈ£ Ã£±â
+	int phoneCheck(MemberVO vo); // ÈŞ´ë¹øÈ£ Áßº¹Ã¼Å©
 	
 } // end MemberService 

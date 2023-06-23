@@ -1,14 +1,14 @@
 package edu.spring.hotel.pageutil;
 
-// í˜ì´ì§€ ë²ˆí˜¸ë“¤ì˜ ë§í¬ë¥¼ ë§Œë“¤ê¸° ìœ„í•œ ìœ í‹¸ë¦¬í‹° í´ë˜ìŠ¤
+// ÆäÀÌÁö ¹øÈ£µéÀÇ ¸µÅ©¸¦ ¸¸µé±â À§ÇÑ À¯Æ¿¸®Æ¼ Å¬·¡½º
 public class PageMaker {
 	private PageCriteria criteria;
-	private int totalCount; // ì „ì²´ ê²Œì‹œê¸€ ê°œìˆ˜
-	private int numsOfPageLinks; // í˜ì´ì§€ ë²ˆí˜¸ ë§í¬ì˜ ê°œìˆ˜
-	private int startPageNo; // ì‹œì‘ í˜ì´ì§€ ë§í¬ ë²ˆí˜¸
-	private int endPageNo; // ë í˜ì´ì§€ ë§í¬ ë²ˆí˜¸
-	private boolean hasPrev; // í™”ë©´ì— ë³´ì´ëŠ” ì‹œì‘ í˜ì´ì§€ ë²ˆí˜¸ë³´ë‹¤ ì‘ì€ ìˆ«ìì˜ í˜ì´ì§€ê°€ ìˆëŠ” ì§€
-	private boolean hasNext; // í™”ë©´ì— ë³´ì´ëŠ” ë í˜ì´ì§€ ë²ˆí˜¸ë³´ë‹¤ í° ìˆ«ìì˜ í˜ì´ì§€ê°€ ìˆëŠ” ì§€
+	private int totalCount; // ÀüÃ¼ °Ô½Ã±Û °³¼ö
+	private int numsOfPageLinks; // ÆäÀÌÁö ¹øÈ£ ¸µÅ©ÀÇ °³¼ö
+	private int startPageNo; // ½ÃÀÛ ÆäÀÌÁö ¸µÅ© ¹øÈ£
+	private int endPageNo; // ³¡ ÆäÀÌÁö ¸µÅ© ¹øÈ£
+	private boolean hasPrev; // È­¸é¿¡ º¸ÀÌ´Â ½ÃÀÛ ÆäÀÌÁö ¹øÈ£º¸´Ù ÀÛÀº ¼ıÀÚÀÇ ÆäÀÌÁö°¡ ÀÖ´Â Áö
+	private boolean hasNext; // È­¸é¿¡ º¸ÀÌ´Â ³¡ ÆäÀÌÁö ¹øÈ£º¸´Ù Å« ¼ıÀÚÀÇ ÆäÀÌÁö°¡ ÀÖ´Â Áö
 	private int totalLinkNo;
 	
 	public PageMaker() {
@@ -55,7 +55,7 @@ public class PageMaker {
 		return totalLinkNo;
 	}
 	
-	// startPageNo, endPageNo, hasPrev, hasNext ê°’ì„ ê³„ì‚° ë° ì„¸íŒ…
+	// startPageNo, endPageNo, hasPrev, hasNext °ªÀ» °è»ê ¹× ¼¼ÆÃ
 	public void setPageData() {
 		totalLinkNo = (int) Math.ceil((double) totalCount / criteria.getNumsPerPage());
 		int temp = (int) Math.ceil((double) criteria.getPage() / numsOfPageLinks) * numsOfPageLinks;
@@ -79,8 +79,8 @@ public class PageMaker {
 		} else {
 			hasNext = true;
 		}
-		// Math.ceil (ì˜¬ë¦¼)
-		// Math.floor (ë²„ë¦¼)
+		// Math.ceil (¿Ã¸²)
+		// Math.floor (¹ö¸²)
 		
 	}
 	

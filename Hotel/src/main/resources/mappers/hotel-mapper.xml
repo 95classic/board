@@ -110,7 +110,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(*) TOTAL_CNT
 		FROM ${hotel}
 	</select>
-
+	
+	<!-- 키워드 검색결과에 따른 게시글 수 반환 -->
+	<select id="total_count_by_hotel_name" resultType="Integer">
+		SELECT COUNT(*) TOTAL_CNT
+		FROM ${hotel}
+		WHERE ${hotelName} LIKE #{keyword}
+	</select>
+	
 	<!-- 리뷰 등록, 삭제가 일어날 때 리뷰 개수와 평균 별점 수정하는 쿼리 -->
 	<update id="update_review_cnt_and_hotel_review_star_avg">
 		UPDATE ${hotel}

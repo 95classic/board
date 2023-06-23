@@ -24,7 +24,7 @@ public class HeartServiceImple implements HeartService {
 	
 	@Override
 	public int read(int hotelId, String memberId) {
-		logger.info("read() í˜¸ì¶œ");
+		logger.info("read() È£Ãâ");
 		logger.info("hotelId = " + hotelId);
 		logger.info("memberId = " + memberId);
 		return heartDAO.select(hotelId, memberId);
@@ -33,9 +33,9 @@ public class HeartServiceImple implements HeartService {
 	@Transactional(value="transactionManager")
 	@Override
 	public int create(HeartVO vo) {
-		logger.info("create() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("create() È£Ãâ : vo = " + vo.toString());
 		heartDAO.insert(vo);
-		logger.info("í•˜íŠ¸ê°œìˆ˜ 1ê°œ ì¦ê°€");
+		logger.info("ÇÏÆ®°³¼ö 1°³ Áõ°¡");
 		hotelDAO.updateHeartCnt(1, vo.getHotelId());
 		return 1;
 	} // end create()
@@ -43,11 +43,11 @@ public class HeartServiceImple implements HeartService {
 	@Transactional(value="transactionManager")
 	@Override
 	public int delete(int hotelId, String memberId) {
-		logger.info("delete() í˜¸ì¶œ");
+		logger.info("delete() È£Ãâ");
 		logger.info("hotelId = " + hotelId);
 		logger.info("memberId = " + memberId);
 		heartDAO.delete(hotelId, memberId);
-		logger.info("í•˜íŠ¸ê°œìˆ˜ 1ê°œ ê°ì†Œ");
+		logger.info("ÇÏÆ®°³¼ö 1°³ °¨¼Ò");
 		hotelDAO.updateHeartCnt(-1, hotelId);
 		return 1;
 	} // end delete()

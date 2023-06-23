@@ -235,11 +235,11 @@ body {
 		</div>
 	</div>
 
-	<form method="GET" class="form-inline justify-content-center">
+	<form action="?keyword=${keyword}" method="GET" class="form-inline justify-content-center">
 		<div class="form-group">
 			<label for="keyword" class="mr-2" style="font-size: 18px;">호텔명
 				검색 :</label> <input type="text" id="keyword" name="keyword"
-				class="form-control mr-2" style="width: 300px;">
+				class="form-control mr-2" style="width: 300px;" required>
 			<button type="submit" class="btn btn-primary">검색</button>
 		</div>
 	</form>
@@ -270,13 +270,10 @@ body {
 			<c:if test="${pageMaker.hasPrev }">
 				<li><a href="?page=${pageMaker.startPageNo - 1 }">이전</a></li>
 			</c:if>
-			<c:forEach begin="${pageMaker.startPageNo }"
-				end="${pageMaker.endPageNo }" var="num">
-				<li><c:if test='${num == pageMaker.criteria.page}'>
-						<a href="?page=${num }" class="active">${num }</a>
-					</c:if> <c:if test='${num != pageMaker.criteria.page}'>
-						<a href="?sortBy=${sortBy }&page=${num }">${num }</a>
-					</c:if></li>
+			<c:forEach begin="${pageMaker.startPageNo }" end="${pageMaker.endPageNo }" var="num">
+				<li>
+					<a href="?page=${num }&sortBy=${sortBy }">${num }</a>
+				</li>
 			</c:forEach>
 			<c:if test="${pageMaker.hasNext }">
 				<li><a href="?page=${pageMaker.endPageNo + 1 }">다음</a></li>

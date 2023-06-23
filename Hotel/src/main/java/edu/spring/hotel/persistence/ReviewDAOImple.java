@@ -22,31 +22,31 @@ public class ReviewDAOImple implements ReviewDAO {
 	
 	@Override
 	public int insert(ReviewVO vo) {
-		logger.info("insert() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("insert() È£Ãâ : vo = " + vo.toString());
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	@Override
 	public List<ReviewVO> select(int hotelId) {
-		logger.info("select() í˜¸ì¶œ : hotelId = " + hotelId);
+		logger.info("select() È£Ãâ : hotelId = " + hotelId);
 		return sqlSession.selectList(NAMESPACE + ".select_all", hotelId);
 	}
 
 	@Override
 	public int update(ReviewVO vo) {
-		logger.info("update() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("update() È£Ãâ : vo = " + vo.toString());
 		return sqlSession.update(NAMESPACE + ".update", vo);
 	}
 
 	@Override
 	public int delete(int reviewId) {
-		logger.info("delete() í˜¸ì¶œ : reviewId = " + reviewId);
+		logger.info("delete() È£Ãâ : reviewId = " + reviewId);
 		return sqlSession.delete(NAMESPACE + ".delete", reviewId);
 	}
 
 	@Override
 	public int selectReviewCnt(String memberId) {
-		logger.info("selectReviewCnt() í˜¸ì¶œ : memberId = " + memberId);
+		logger.info("selectReviewCnt() È£Ãâ : memberId = " + memberId);
 		return sqlSession.selectOne(NAMESPACE + ".select_review_cnt", memberId);
 	}
 

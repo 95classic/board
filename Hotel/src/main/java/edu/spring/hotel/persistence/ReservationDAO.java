@@ -5,11 +5,11 @@ import java.util.List;
 import edu.spring.hotel.domain.ReservationVO;
 
 public interface ReservationDAO {
-	// ì˜ˆì•½ ë“±ë¡
+	// ¿¹¾à µî·Ï
 	int insert(ReservationVO vo);
-	// ë‚´ ì˜ˆì•½ ëª©ë¡ ê²€ìƒ‰
+	// ³» ¿¹¾à ¸ñ·Ï °Ë»ö
 	List<ReservationVO> select(String memberId);
-	// ì˜ˆì•½ ì‚­ì œ
+	// ¿¹¾à »èÁ¦
 	int delete(int reservationId, int roomId);
 	
 } // end ReservationDAO

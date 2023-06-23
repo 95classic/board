@@ -23,7 +23,7 @@ public class HeartDAOImple implements HeartDAO {
 
 	@Override
 	public int select(int hotelId, String memberId) {
-		logger.info("select() í˜¸ì¶œ");
+		logger.info("select() È£Ãâ");
 		logger.info("hotelId = " + hotelId);
 		logger.info("memberId = " + memberId);
 		Map<String, Object> args = new HashMap<>();
@@ -34,13 +34,13 @@ public class HeartDAOImple implements HeartDAO {
 
 	@Override
 	public int insert(HeartVO vo) {
-		logger.info("insert() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("insert() È£Ãâ : vo = " + vo.toString());
 		return sqlSession.insert(NAMESPACE + ".insert", vo);
 	}
 
 	@Override
 	public int delete(int hotelId, String memberId) {
-		logger.info("delete() í˜¸ì¶œ");
+		logger.info("delete() È£Ãâ");
 		logger.info("hotelId = " + hotelId);
 		logger.info("memberId = " + memberId);
 		Map<String, Object> args = new HashMap<>();
@@ -51,7 +51,7 @@ public class HeartDAOImple implements HeartDAO {
 
 	@Override
 	public int selectHeartCnt(String memberId) {
-		logger.info("selectHeartCnt() í˜¸ì¶œ : memberId = " + memberId);
+		logger.info("selectHeartCnt() È£Ãâ : memberId = " + memberId);
 		return sqlSession.selectOne(NAMESPACE + ".select_heart_cnt", memberId);
 	}
 	

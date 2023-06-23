@@ -27,36 +27,36 @@ public class ReviewServiceImple implements ReviewService {
 	@Transactional(value="transactionManager")
 	@Override
 	public int create(ReviewVO vo) {
-	    logger.info("ë¦¬ë·° create() í˜¸ì¶œ : vo = " + vo.toString());
+	    logger.info("¸®ºä create() È£Ãâ : vo = " + vo.toString());
 	    int result = reviewDAO.insert(vo);
-	    logger.info("ë¦¬ë·° ìž…ë ¥ ì„±ê³µ!");
+	    logger.info("¸®ºä ÀÔ·Â ¼º°ø!");
 
-	    // í˜¸í…” ì •ë³´ ìˆ˜ì •
+	    // È£ÅÚ Á¤º¸ ¼öÁ¤
 	    int updateResult = hotelDAO.updateReviewCntAndAvg(1, vo.getHotelId());
-	    logger.info("í˜¸í…” ì •ë³´ ìˆ˜ì • ì„±ê³µ!");
+	    logger.info("È£ÅÚ Á¤º¸ ¼öÁ¤ ¼º°ø!");
 
 	    return result;
 	}
 	@Override
 	public List<ReviewVO> read(int hotelId) {
-		logger.info("ë¦¬ë·° read() í˜¸ì¶œ : hotelId = " + hotelId);
+		logger.info("¸®ºä read() È£Ãâ : hotelId = " + hotelId);
 		return reviewDAO.select(hotelId);
 	}
 
 	@Override
 	public int update(ReviewVO vo) {
-		logger.info("ë¦¬ë·° update() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("¸®ºä update() È£Ãâ : vo = " + vo.toString());
 		return reviewDAO.update(vo);
 	}
 
 	@Transactional(value="transactionManager")
 	@Override
 	public int delete(int reviewId, int hotelId) throws Exception {
-		logger.info("ë¦¬ë·° delete() í˜¸ì¶œ");
+		logger.info("¸®ºä delete() È£Ãâ");
 		reviewDAO.delete(reviewId);
-		logger.info("ë¦¬ë·° ì‚­ì œ ì„±ê³µ!");
+		logger.info("¸®ºä »èÁ¦ ¼º°ø!");
 		int updateResult = hotelDAO.updateReviewCntAndAvg(-1, hotelId);
-	    logger.info("í˜¸í…” ì •ë³´ ìˆ˜ì • ì„±ê³µ!");
+	    logger.info("È£ÅÚ Á¤º¸ ¼öÁ¤ ¼º°ø!");
 		return 1;
 	}
 	

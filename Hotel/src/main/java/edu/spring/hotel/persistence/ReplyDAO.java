@@ -5,15 +5,15 @@ import java.util.List;
 import edu.spring.hotel.domain.ReplyVO;
 
 public interface ReplyDAO {
-	// ëŒ“ê¸€ ë“±ë¡
+	// ´ñ±Û µî·Ï
 	int insert(ReplyVO vo);
-	// ëŒ“ê¸€ ì „ì²´ê²€ìƒ‰
+	// ´ñ±Û ÀüÃ¼°Ë»ö
 	List<ReplyVO> selectAll(int boardId);
-	// ëŒ“ê¸€ ìˆ˜ì •
+	// ´ñ±Û ¼öÁ¤
 	int update(ReplyVO vo);
-	// ëŒ“ê¸€ ì‚­ì œ
+	// ´ñ±Û »èÁ¦
 	int delete(int replyId);
-	// ë‚´ê°€ ì‘ì„±í•œ ëŒ“ê¸€ ìˆ˜ ê²€ìƒ‰
+	// ³»°¡ ÀÛ¼ºÇÑ ´ñ±Û ¼ö °Ë»ö
 	int selectReplyCnt(String memberId);
 
 } // end ReplyDAO

@@ -27,7 +27,7 @@ public class FindRESTController {
 	public String findMemberId(@RequestParam("memberName") String memberName, 
 	                           @RequestParam("memberPhone") String memberPhone, 
 	                           @RequestParam("memberEmail") String memberEmail) {
-	    logger.info("findMemberId() í˜¸ì¶œ vo = " + memberName + ", " + memberPhone + ", " + memberEmail);
+	    logger.info("findMemberId() È£Ãâ vo = " + memberName + ", " + memberPhone + ", " + memberEmail);
 	    MemberVO vo = new MemberVO(null, null, memberName, memberPhone, memberEmail, null);
 	    String memberId = memberService.findMemberId(vo);
 	    return memberId;
@@ -38,7 +38,7 @@ public class FindRESTController {
 							   @RequestParam("memberName") String memberName, 
 							   @RequestParam("memberPhone") String memberPhone, 
 							   @RequestParam("memberEmail") String memberEmail) {
-		logger.info("findMemberPw() í˜¸ì¶œ");
+		logger.info("findMemberPw() È£Ãâ");
 		MemberVO vo = new MemberVO(memberId, null, memberName, memberPhone, memberEmail, null);
 		String memberPw = memberService.findMemberPw(vo);	
 		return memberPw;

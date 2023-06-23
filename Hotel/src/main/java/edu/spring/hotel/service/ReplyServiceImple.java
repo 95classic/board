@@ -26,32 +26,32 @@ public class ReplyServiceImple implements ReplyService {
 	@Transactional(value="transactionManager")
 	@Override
 	public int create(ReplyVO vo) {
-		logger.info("ëŒ“ê¸€ create() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("´ñ±Û create() È£Ãâ : vo = " + vo.toString());
 		replyDAO.insert(vo);
-		logger.info("ëŒ“ê¸€ ìž…ë ¥ ì„±ê³µ!");
+		logger.info("´ñ±Û ÀÔ·Â ¼º°ø!");
 		boardDAO.updateReplyCnt(1, vo.getBoardId());
-		logger.info("ê²Œì‹œê¸€ ìˆ˜ì • ì„±ê³µ!");
+		logger.info("°Ô½Ã±Û ¼öÁ¤ ¼º°ø!");
 		return 1;
 	}
 
 	@Override
 	public List<ReplyVO> read(int boardId) {
-		logger.info("ëŒ“ê¸€ read() í˜¸ì¶œ : boardId = " + boardId);
+		logger.info("´ñ±Û read() È£Ãâ : boardId = " + boardId);
 		return replyDAO.selectAll(boardId);
 	}
 
 	@Override
 	public int update(ReplyVO vo) {
-		logger.info("ëŒ“ê¸€ update() í˜¸ì¶œ : vo = " + vo.toString());
+		logger.info("´ñ±Û update() È£Ãâ : vo = " + vo.toString());
 		return replyDAO.update(vo);
 	}
 	
 	@Transactional(value="transactionManager")
 	@Override
 	public int delete(int replyId, int boardId) throws Exception {
-		logger.info("delete() í˜¸ì¶œ : replyId = " + replyId);
+		logger.info("delete() È£Ãâ : replyId = " + replyId);
 		replyDAO.delete(replyId);
-		logger.info("ëŒ“ê¸€ ì‚­ì œ ì„±ê³µ!");
+		logger.info("´ñ±Û »èÁ¦ ¼º°ø!");
 		boardDAO.updateReplyCnt(-1, boardId);
 		return 1;
 	}

@@ -25,19 +25,19 @@ public class RoomDAOImple implements RoomDAO {
 
 	@Override
 	public List<RoomVO> selectByHotelId(int hotelId) {
-		logger.info("selectByHotelId() í˜¸ì¶œ : hotelId = " + hotelId);
+		logger.info("selectByHotelId() È£Ãâ : hotelId = " + hotelId);
 		return sqlSession.selectList(NAMESPACE + ".select_by_hotel_id", hotelId);
 	}
 
 	@Override
 	public RoomVO select(int roomId) {
-		logger.info("select() í˜¸ì¶œ : roomId = " + roomId);
+		logger.info("select() È£Ãâ : roomId = " + roomId);
 		return sqlSession.selectOne(NAMESPACE + ".select_by_room_id", roomId);
 	}
 
 	@Override
 	public int updateRoomCnt(int amount, int roomId) {
-		logger.info("updateRoomCnt() í˜¸ì¶œ");
+		logger.info("updateRoomCnt() È£Ãâ");
 		logger.info("amount = " + amount + ",  roomId = " + roomId);
 		Map<String, Object> args = new HashMap<>();
 		args.put("amount", amount);

@@ -28,7 +28,7 @@ public class ReservationController {
 	
 	@GetMapping("/myReservation")
 	public void myReservationGET(Model model, HttpSession session) {
-		logger.info("myReservationGET() í˜¸ì¶œ");
+		logger.info("myReservationGET() È£Ãâ");
 		String memberId = (String) session.getAttribute("memberId");
 		List<ReservationVO> list = reservationService.read(memberId);
 		model.addAttribute("list", list);
@@ -36,7 +36,7 @@ public class ReservationController {
 	
 	@PostMapping("/createReservation")
 	public String createReservationPOST(ReservationVO vo, RedirectAttributes reAttr) {
-		logger.info("createReservationPOST() í˜¸ì¶œ");
+		logger.info("createReservationPOST() È£Ãâ");
 		int result = reservationService.create(vo);
 		
 		if (result == 1) {
@@ -49,16 +49,16 @@ public class ReservationController {
 	
 	@PostMapping("/cancleReservation")
 	public String cancleReservationPOST(Integer reservationId, Integer roomId, RedirectAttributes reAttr) {
-		logger.info("cancleReservationPOST() í˜¸ì¶œ : reservationId = " + reservationId);
+		logger.info("cancleReservationPOST() È£Ãâ : reservationId = " + reservationId);
 		
 		int result = reservationService.delete(reservationId, roomId);
 		
 		if (result == 1) {
-			logger.info("ì˜ˆì•½ì·¨ì†Œ ì„±ê³µ");
+			logger.info("¿¹¾àÃë¼Ò ¼º°ø");
 			reAttr.addFlashAttribute("result", "deleteSuccess");
 			return "redirect:/member/myReservation";
 		} else {
-			logger.info("ì˜ˆì•½ì·¨ì†Œ ì‹¤íŒ¨");
+			logger.info("¿¹¾àÃë¼Ò ½ÇÆÐ");
 			return "redirect:/member/myReservation";
 		}
 		

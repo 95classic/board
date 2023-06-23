@@ -6,13 +6,13 @@ import edu.spring.hotel.domain.RoomVO;
 
 public interface RoomDAO {
 	
-	// ê·¸ í˜¸í…”ì˜ ë°© ëª©ë¡ ì „ì²´ê²€ìƒ‰
+	// ±× È£ÅÚÀÇ ¹æ ¸ñ·Ï ÀüÃ¼°Ë»ö
 	List<RoomVO> selectByHotelId(int hotelId);
 	
-	// ë°© ìƒì„¸ê²€ìƒ‰
+	// ¹æ »ó¼¼°Ë»ö
 	RoomVO select(int roomId);
 	
-	// ì˜ˆì•½ ë“±ë¡, ì·¨ì†Œê°€ ì¼ì–´ë‚  ë•Œ ì”ì—¬ ê°ì‹¤ ìˆ˜ ìˆ˜ì •
+	// ¿¹¾à µî·Ï, Ãë¼Ò°¡ ÀÏ¾î³¯ ¶§ ÀÜ¿© °´½Ç ¼ö ¼öÁ¤
 	int updateRoomCnt(int amount, int roomId);
 	
 } // end RoomDAO

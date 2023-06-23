@@ -6,23 +6,23 @@ import edu.spring.hotel.domain.MemberVO;
 
 public interface MemberDAO {
 	
-	int insert(MemberVO vo); // íšŒì› ë“±ë¡
+	int insert(MemberVO vo); // È¸¿ø µî·Ï
 	
-	MemberVO select(String memberId); // íšŒì› ìƒì„¸ê²€ìƒ‰
+	MemberVO select(String memberId); // È¸¿ø »ó¼¼°Ë»ö
 	
-	int update(MemberVO vo); // íšŒì› ìˆ˜ì •
+	int update(MemberVO vo); // È¸¿ø ¼öÁ¤
 	
-	int delete(MemberVO vo); // íšŒì› ì‚­ì œ
+	int delete(MemberVO vo); // È¸¿ø »èÁ¦
 	
-	int idCheck(MemberVO vo); // ì•„ì´ë”” ì¤‘ë³µì²´í¬
+	int idCheck(MemberVO vo); // ¾ÆÀÌµğ Áßº¹Ã¼Å©
 	
-	MemberVO login(MemberVO vo) throws Exception; // ë¡œê·¸ì¸
+	MemberVO login(MemberVO vo) throws Exception; // ·Î±×ÀÎ
 	
-	String findMemberId(MemberVO vo); // ì•„ì´ë”” ì°¾ê¸°
+	String findMemberId(MemberVO vo); // ¾ÆÀÌµğ Ã£±â
 	 
-	String findMemberPw(MemberVO vo); // ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°
+	String findMemberPw(MemberVO vo); // ºñ¹Ğ¹øÈ£ Ã£±â
 	
-	int phoneCheck(MemberVO vo); //  íœ´ëŒ€í° ë²ˆí˜¸ ì¤‘ë³µì²´í¬ 
+	int phoneCheck(MemberVO vo); //  ÈŞ´ëÆù ¹øÈ£ Áßº¹Ã¼Å© 
 	
 	Date selectMemberDateCreated(String memberId);
 	

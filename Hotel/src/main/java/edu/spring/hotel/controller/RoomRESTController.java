@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.spring.hotel.domain.RoomVO;
 import edu.spring.hotel.service.RoomService;
 
-// ë°© ì´ë¦„ì„ í´ë¦­í–ˆì„ ì‹œ ê·¸ ë°©ì— ëŒ€í•œ ìƒì„¸ì •ë³´ ajaxí˜•ì‹ìœ¼ë¡œ ë°”ë¡œ ì¶œë ¥í•˜ê¸°
+// ¹æ ÀÌ¸§À» Å¬¸¯ÇßÀ» ½Ã ±× ¹æ¿¡ ´ëÇÑ »ó¼¼Á¤º¸ ajaxÇü½ÄÀ¸·Î ¹Ù·Î Ãâ·ÂÇÏ±â
 @RestController
 @RequestMapping(value="room")
 public class RoomRESTController {
@@ -23,7 +23,7 @@ public class RoomRESTController {
 	
 	@GetMapping("/{roomId}")
 	public RoomVO selectRoom(@PathVariable("roomId") int roomId) {
-		logger.info("selectRoom() í˜¸ì¶œ : roomId = " + roomId);
+		logger.info("selectRoom() È£Ãâ : roomId = " + roomId);
 		RoomVO vo = roomService.selectRead(roomId);
 		
 		return vo;	
